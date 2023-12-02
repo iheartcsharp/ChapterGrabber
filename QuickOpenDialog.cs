@@ -40,11 +40,17 @@ namespace JarrettVance.ChapterTools
                 foreach (var d in dirs)
                 {
                     if (Directory.Exists(Path.Combine(d.Path, "VIDEO_TS")))
+                    {
                         discs.Add(new Disc(d.Path, "DVD"));
+                    }
                     else if (Directory.Exists(Path.Combine(Path.Combine(d.Path, "BDMV"), "PLAYLIST")))
+                    {
                         discs.Add(new Disc(d.Path, "Bluray"));
+                    }
                     else if (Directory.Exists(Path.Combine(d.Path, "ADV_OBJ")))
+                    {
                         discs.Add(new Disc(d.Path, "HDDVD"));
+                    }
                 }
 
                 foreach (var disc in discs)
@@ -98,11 +104,18 @@ namespace JarrettVance.ChapterTools
 
             var exts = new List<string>();
             if (dir.ChildrenFilesPath.Any(x => x.FileExtension == ".xml"))
+            {
                 exts.Add("xml");
+            }
             else if (dir.ChildrenFilesPath.Any(x => x.FileExtension == ".chapters"))
+            {
                 exts.Add("chapter");
+            }
             else if (dir.ChildrenFilesPath.Any(x => x.FileExtension == ".txt"))
+            {
                 exts.Add("txt");
+            }
+
             this.FoundExtractions = exts.ToArray();
         }
         public string Path { get; protected set; }

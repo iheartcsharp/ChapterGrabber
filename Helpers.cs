@@ -40,7 +40,9 @@ namespace JarrettVance.ChapterTools
         public static void FillRoundedRectangle(Graphics graphics, Rectangle rectangle, Brush brush, int radius)
         {
             if (graphics == null)
+            {
                 throw new ArgumentNullException("graphics");
+            }
 
             SmoothingMode mode = graphics.SmoothingMode;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;

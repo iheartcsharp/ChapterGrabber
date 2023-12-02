@@ -21,7 +21,10 @@ namespace JarrettVance.ChapterTools
             extractor.StreamDetected += (sender, arg) =>
               {
                   extracted.Add(arg.ProgramChain);
-                  if (!Hidden(arg.ProgramChain)) listBox1.Items.Add(arg.ProgramChain);
+                  if (!Hidden(arg.ProgramChain))
+                  {
+                      listBox1.Items.Add(arg.ProgramChain);
+                  }
               };
             extractor.ChaptersLoaded += (sender, arg) =>
               {
@@ -43,9 +46,21 @@ namespace JarrettVance.ChapterTools
 
         private bool Hidden(ChapterInfo pgc)
         {
-            if (checkBoxLessThan20mins.Checked && pgc.Duration < TWENTY) return true;
-            if (checkBoxLessThan5.Checked && pgc.Chapters.Count < 5) return true;
-            if (checkBoxGreaterThan50.Checked && pgc.Chapters.Count > 50) return true;
+            if (checkBoxLessThan20mins.Checked && pgc.Duration < TWENTY)
+            {
+                return true;
+            }
+
+            if (checkBoxLessThan5.Checked && pgc.Chapters.Count < 5)
+            {
+                return true;
+            }
+
+            if (checkBoxGreaterThan50.Checked && pgc.Chapters.Count > 50)
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -64,7 +79,9 @@ namespace JarrettVance.ChapterTools
             {
                 var vol = extracted.First().VolumeName;
                 if (!string.IsNullOrEmpty(vol))
+                {
                     this.Text = "Select Stream from " + vol;
+                }
             }
         }
 
@@ -76,9 +93,13 @@ namespace JarrettVance.ChapterTools
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedItems.Count == 1)
+            {
                 DialogResult = DialogResult.OK;
+            }
             else
+            {
                 MessageBox.Show("Please select a stream.");
+            }
         }
 
         private void checkBox_CheckedChanged(object sender, EventArgs e)

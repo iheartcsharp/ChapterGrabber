@@ -77,7 +77,9 @@ namespace JarrettVance.ChapterTools.Extractors
                     uint chainOffset = IfoUtil.GetChainOffset(ifoFile, pcgITPosition, curChain);
                     TimeSpan? time = IfoUtil.ReadTimeSpan(ifoFile, pcgITPosition, chainOffset, out FPS);
                     if (time == null)
+                    {
                         break;
+                    }
 
                     if (time.Value > programTime)
                     {
@@ -88,7 +90,9 @@ namespace JarrettVance.ChapterTools.Extractors
                 }
             }
             if (programChain < 0)
+            {
                 return null;
+            }
 
             chapters.Add(new ChapterEntry() { Name = "Chapter 1" });
 
@@ -100,7 +104,9 @@ namespace JarrettVance.ChapterTools.Extractors
                 int entryCell = IfoUtil.GetFileBlock(ifoFile, ((pcgITPosition + longestChainOffset) + programMapOffset) + currentProgram, 1)[0];
                 int exitCell = entryCell;
                 if (currentProgram < (programChainPrograms - 1))
+                {
                     exitCell = IfoUtil.GetFileBlock(ifoFile, ((pcgITPosition + longestChainOffset) + programMapOffset) + (currentProgram + 1), 1)[0] - 1;
+                }
 
                 TimeSpan totalTime = TimeSpan.Zero;
                 for (int currentCell = entryCell; currentCell <= exitCell; currentCell++)
@@ -121,7 +127,9 @@ namespace JarrettVance.ChapterTools.Extractors
 
                 duration += totalTime;
                 if (currentProgram + 1 < programChainPrograms)
+                {
                     chapters.Add(new ChapterEntry() { Name = string.Format("Chapter {0}", currentProgram + 2), Time = duration });
+                }
             }
             return chapters;
         }

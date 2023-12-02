@@ -15,7 +15,10 @@ namespace JarrettVance.ChapterTools
                 byte[] buf = new byte[count];
                 stream.Seek(pos, SeekOrigin.Begin);
                 if (stream.Read(buf, 0, count) != count)
+                {
                     return buf;
+                }
+
                 return buf;
             }
         }
@@ -42,9 +45,15 @@ namespace JarrettVance.ChapterTools
             int byte0_high = val >> 4;
             int byte0_low = val & 0x0F;
             if (byte0_high > 11)
+            {
                 return (short)(((byte0_high - 12) * 10) + byte0_low);
+            }
+
             if ((byte0_high <= 3) || (byte0_high >= 8))
+            {
                 return null;
+            }
+
             return (short)(((byte0_high - 4) * 10) + byte0_low);
         }
 
@@ -83,7 +92,9 @@ namespace JarrettVance.ChapterTools
             int fpsMask = playbackBytes[3] >> 6;
             fps = fpsMask == 0x01 ? 25D : fpsMask == 0x03 ? (30D / 1.001D) : 0;
             if (frames == null)
+            {
                 return null;
+            }
 
             try
             {
@@ -92,7 +103,10 @@ namespace JarrettVance.ChapterTools
                 int seconds = AsHex(playbackBytes[2]);
                 TimeSpan ret = new TimeSpan(hours, minutes, seconds);
                 if (fps != 0)
+                {
                     ret = ret.Add(TimeSpan.FromSeconds((double)frames / fps));
+                }
+
                 return ret;
             }
             catch { return null; }

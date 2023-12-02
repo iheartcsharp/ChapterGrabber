@@ -26,7 +26,11 @@ namespace JarrettVance.ChapterTools
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Application.EnableVisualStyles();
             var f = new MainForm();
-            if (args.Length > 0) f.StartupFile = args[0];
+            if (args.Length > 0)
+            {
+                f.StartupFile = args[0];
+            }
+
             Application.Run(f);
         }
 

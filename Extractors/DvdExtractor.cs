@@ -19,7 +19,9 @@ namespace JarrettVance.ChapterTools.Extractors
             string path = Path.Combine(location, "VIDEO_TS");
 
             if (!Directory.Exists(path))
+            {
                 throw new FileNotFoundException("The VIDEO_TS folder was not found on the DVD.");
+            }
 
             List<ChapterInfo> streams = new List<ChapterInfo>();
 
@@ -48,7 +50,11 @@ namespace JarrettVance.ChapterTools.Extractors
                         continue;
                     }
                     var pgc = ex.GetStreams(vtsIFO)[0];
-                    if (string.IsNullOrEmpty(vol)) pgc.VolumeName = vol;
+                    if (string.IsNullOrEmpty(vol))
+                    {
+                        pgc.VolumeName = vol;
+                    }
+
                     streams.Add(pgc);
                 }
             }
@@ -60,7 +66,11 @@ namespace JarrettVance.ChapterTools.Extractors
                 {
                     ChapterInfo pgc = ex.GetStreams(file)[0];
                     pgc.SourceName = Path.GetFileNameWithoutExtension(file);
-                    if (!string.IsNullOrEmpty(vol)) pgc.VolumeName = vol;
+                    if (!string.IsNullOrEmpty(vol))
+                    {
+                        pgc.VolumeName = vol;
+                    }
+
                     streams.Add(pgc);
                 }
             }

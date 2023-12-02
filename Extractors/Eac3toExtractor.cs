@@ -66,7 +66,11 @@ namespace JarrettVance.ChapterTools.Extractors
                 p.WaitForExit();
                 if (output.Contains("Chapters"))
                 {
-                    if (File.Exists("chapters.txt")) File.Delete("chapters.txt");
+                    if (File.Exists("chapters.txt"))
+                    {
+                        File.Delete("chapters.txt");
+                    }
+
                     psi.Arguments = location + " " + pgc.SourceName + ") chapters.txt";
                     p = Process.Start(psi);
                     output = p.StandardOutput.ReadToEnd();

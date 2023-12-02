@@ -21,7 +21,10 @@ namespace JarrettVance.ChapterTools
 
         protected void OnSearchComplete()
         {
-            if (SearchComplete != null) SearchComplete(this, EventArgs.Empty);
+            if (SearchComplete != null)
+            {
+                SearchComplete(this, EventArgs.Empty);
+            }
         }
     }
 

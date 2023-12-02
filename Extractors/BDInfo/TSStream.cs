@@ -240,9 +240,14 @@ namespace BDInfo
                         return "LPCM Audio";
                     case TSStreamType.AC3_AUDIO:
                         if (((TSAudioStream)this).AudioMode == TSAudioMode.Extended)
+                        {
                             return "Dolby Digital EX Audio";
+                        }
                         else
+                        {
                             return "Dolby Digital Audio";
+                        }
+
                     case TSStreamType.AC3_PLUS_AUDIO:
                     case TSStreamType.AC3_PLUS_SECONDARY_AUDIO:
                         return "Dolby Digital Plus Audio";
@@ -250,9 +255,14 @@ namespace BDInfo
                         return "Dolby TrueHD Audio";
                     case TSStreamType.DTS_AUDIO:
                         if (((TSAudioStream)this).AudioMode == TSAudioMode.Extended)
+                        {
                             return "DTS-ES Audio";
+                        }
                         else
+                        {
                             return "DTS Audio";
+                        }
+
                     case TSStreamType.DTS_HD_AUDIO:
                         return "DTS-HD Audio";
                     case TSStreamType.DTS_HD_SECONDARY_AUDIO:
@@ -340,9 +350,14 @@ namespace BDInfo
                         return "LPCM";
                     case TSStreamType.AC3_AUDIO:
                         if (((TSAudioStream)this).AudioMode == TSAudioMode.Extended)
+                        {
                             return "AC3-EX";
+                        }
                         else
+                        {
                             return "AC3";
+                        }
+
                     case TSStreamType.AC3_PLUS_AUDIO:
                     case TSStreamType.AC3_PLUS_SECONDARY_AUDIO:
                         return "AC3+";
@@ -350,9 +365,14 @@ namespace BDInfo
                         return "TrueHD";
                     case TSStreamType.DTS_AUDIO:
                         if (((TSAudioStream)this).AudioMode == TSAudioMode.Extended)
+                        {
                             return "DTS-ES";
+                        }
                         else
+                        {
                             return "DTS";
+                        }
+
                     case TSStreamType.DTS_HD_AUDIO:
                         return "DTS-HD HR";
                     case TSStreamType.DTS_HD_SECONDARY_AUDIO:

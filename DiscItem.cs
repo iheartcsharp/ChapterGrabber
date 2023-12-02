@@ -26,23 +26,38 @@ namespace JarrettVance.ChapterTools
             lblName.Text = disc.Name;
 
             if (disc.FoundExtractions.Length > 0)
+            {
                 this.lblStatus.Text = "Possible chapters files: " + string.Join(", ", disc.FoundExtractions);
+            }
             else
+            {
                 this.lblStatus.Text = "No possible chapter files found";
+            }
 
             if (disc.Type == "DVD")
+            {
                 picDisc.Image = Resources.DVD;
+            }
             else if (disc.Type == "Bluray")
+            {
                 picDisc.Image = Resources.Bluray;
+            }
             else if (disc.Type == "HDDVD")
+            {
                 picDisc.Image = Resources.HDDVD;
+            }
             else
+            {
                 picDisc.Image = null;
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Opened != null) Opened(this, e);
+            if (Opened != null)
+            {
+                Opened(this, e);
+            }
         }
     }
 }

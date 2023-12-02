@@ -18,7 +18,9 @@ namespace JarrettVance.ChapterTools.Extractors
             List<ChapterInfo> pgcs = new List<ChapterInfo>();
             string path = Path.Combine(location, "ADV_OBJ");
             if (!Directory.Exists(path))
+            {
                 throw new FileNotFoundException("Could not find ADV_OBJ folder on HD-DVD disc.");
+            }
 
             ChapterExtractor ex = new XplExtractor();
             ex.StreamDetected += (sender, args) => OnStreamDetected(args.ProgramChain);
@@ -29,7 +31,11 @@ namespace JarrettVance.ChapterTools.Extractors
             foreach (string file in Directory.GetFiles(path, "*.xpl"))
             {
                 var pgc = ex.GetStreams(file)[0];
-                if (!string.IsNullOrEmpty(vol)) pgc.VolumeName = vol;
+                if (!string.IsNullOrEmpty(vol))
+                {
+                    pgc.VolumeName = vol;
+                }
+
                 pgcs.Add(pgc);
             }
 

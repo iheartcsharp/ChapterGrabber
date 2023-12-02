@@ -18,7 +18,9 @@ namespace JarrettVance.ChapterTools.Extractors
             List<ChapterInfo> pgcs = new List<ChapterInfo>();
             string path = Path.Combine(Path.Combine(location, "BDMV"), "PLAYLIST");
             if (!Directory.Exists(path))
+            {
                 throw new FileNotFoundException("Could not find PLAYLIST folder on BluRay disc.");
+            }
 
             ChapterExtractor ex = new BDInfoExtractor();
             ex.StreamDetected += (sender, args) => OnStreamDetected(args.ProgramChain);
@@ -28,7 +30,11 @@ namespace JarrettVance.ChapterTools.Extractors
             foreach (string file in Directory.GetFiles(path, "*.mpls"))
             {
                 var pgc = ex.GetStreams(file)[0];
-                if (!string.IsNullOrEmpty(vol)) pgc.VolumeName = vol;
+                if (!string.IsNullOrEmpty(vol))
+                {
+                    pgc.VolumeName = vol;
+                }
+
                 pgcs.Add(pgc);
             }
 

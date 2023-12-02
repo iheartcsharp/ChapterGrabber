@@ -262,7 +262,9 @@ namespace BDInfo
                     string streamClipFilePath = Path.Combine(Path.Combine(FileInfo.Directory.Parent.FullName, "CLIPINF"),
                       streamClipFileName);
                     if (File.Exists(streamClipFilePath) && !streamClipFiles.ContainsKey(streamClipFileName))
+                    {
                         streamClipFiles.Add(streamClipFileName, new TSStreamClipFile(new FileInfo(streamClipFilePath)));
+                    }
 
                     if (streamClipFiles.ContainsKey(streamClipFileName))
                     {

@@ -65,7 +65,9 @@ namespace JarrettVance.ChapterTools.Grabbers
                 {
                     string name = names.Where(n => n.Number == i + 1).Select(n => n.Title).FirstOrDefault();
                     if (!string.IsNullOrEmpty(name))
+                    {
                         chapters[i] = new ChapterEntry() { Name = name, Time = chapters[i].Time };
+                    }
                 }
             }
             else

@@ -21,17 +21,26 @@ namespace JarrettVance.ChapterTools.Pathing
 
         public static string GetClosestExistingDirectory(string dir)
         {
-            if (string.IsNullOrEmpty(dir)) return null;
+            if (string.IsNullOrEmpty(dir))
+            {
+                return null;
+            }
 
             try
             {
                 DirectoryPathAbsolute last = new DirectoryPathAbsolute(dir);
                 if (last.Exists)
+                {
                     return last.Path;
+                }
                 else if (last.ParentDirectoryPath.Exists)
+                {
                     return last.ParentDirectoryPath.Path;
+                }
                 else if (last.ParentDirectoryPath.ParentDirectoryPath.Exists)
+                {
                     return last.ParentDirectoryPath.ParentDirectoryPath.Path;
+                }
             }
             catch (Exception ex)
             {

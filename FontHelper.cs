@@ -47,7 +47,9 @@ namespace JarrettVance.ChapterTools
             {
                 // cache the family in a dictionary for fast lookup.
                 if (!sFamilies.ContainsKey(family))
+                {
                     sFamilies.Add(family, new FontFamily(family, sCustomFonts));
+                }
             }
             catch (ArgumentException)
             {

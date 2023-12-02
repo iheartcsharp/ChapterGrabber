@@ -28,7 +28,10 @@ namespace JarrettVance.ChapterTools
             {
                 errorProvider1.SetError(txtApiKey, "You must provide a valid 20 digit api key.");
             }
-            else errorProvider1.SetError(txtApiKey, "");
+            else
+            {
+                errorProvider1.SetError(txtApiKey, "");
+            }
         }
 
         private void DatabaseCredentialsDialog_FormClosing(object sender, FormClosingEventArgs e)
@@ -37,7 +40,9 @@ namespace JarrettVance.ChapterTools
             {
                 if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing ||
                     e.CloseReason == CloseReason.None)
+                {
                     e.Cancel = true;
+                }
             }
         }
 

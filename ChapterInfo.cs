@@ -30,7 +30,11 @@ namespace JarrettVance.ChapterTools
 
         public bool HasNames()
         {
-            if (this.Chapters.Count == 0) return false;
+            if (this.Chapters.Count == 0)
+            {
+                return false;
+            }
+
             string name = this.Chapters[0].Name ?? string.Empty;
             // assume either blank or "Chapter 1"
             var charCount = this.Chapters
@@ -44,7 +48,11 @@ namespace JarrettVance.ChapterTools
 
         public bool NamesNeedPopulated()
         {
-            if (Chapters.Count == 0) return false;
+            if (Chapters.Count == 0)
+            {
+                return false;
+            }
+
             string name = Chapters[0].Name;
             // assume either blank or "Chapter 1"
             return name.ToLowerInvariant()
@@ -66,27 +74,49 @@ namespace JarrettVance.ChapterTools
             float matches = 0F;
 
             count++;
-            if (Title != null && Title.Equals(other.Title, StringComparison.InvariantCultureIgnoreCase)) matches++;
+            if (Title != null && Title.Equals(other.Title, StringComparison.InvariantCultureIgnoreCase))
+            {
+                matches++;
+            }
 
             count++;
-            if (SourceHash != null && SourceHash.Equals(other.SourceHash)) matches++;
+            if (SourceHash != null && SourceHash.Equals(other.SourceHash))
+            {
+                matches++;
+            }
 
             count++;
-            if (LangCode != null && LangCode.Equals(other.LangCode)) matches++;
+            if (LangCode != null && LangCode.Equals(other.LangCode))
+            {
+                matches++;
+            }
 
             count++;
-            if (Math.Abs(Duration.TotalSeconds - other.Duration.TotalSeconds) < 1) matches++;
+            if (Math.Abs(Duration.TotalSeconds - other.Duration.TotalSeconds) < 1)
+            {
+                matches++;
+            }
 
             count++;
-            if (Math.Round(FramesPerSecond * 1000) - Math.Round(other.FramesPerSecond * 1000) == 0) matches++;
+            if (Math.Round(FramesPerSecond * 1000) - Math.Round(other.FramesPerSecond * 1000) == 0)
+            {
+                matches++;
+            }
 
             for (int i = 0; i < Chapters.Count; i++)
             {
                 count = count + 2F;
                 if (i < other.Chapters.Count)
                 {
-                    if (Chapters[i].Name != null && Chapters[i].Name.Equals(other.Chapters[i].Name, StringComparison.InvariantCultureIgnoreCase)) matches++;
-                    if (Math.Abs(Chapters[i].Time.TotalSeconds - other.Chapters[i].Time.TotalSeconds) < 1) matches++;
+                    if (Chapters[i].Name != null && Chapters[i].Name.Equals(other.Chapters[i].Name, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        matches++;
+                    }
+
+                    if (Math.Abs(Chapters[i].Time.TotalSeconds - other.Chapters[i].Time.TotalSeconds) < 1)
+                    {
+                        matches++;
+                    }
                 }
             }
             return matches / count;
@@ -187,7 +217,9 @@ namespace JarrettVance.ChapterTools
             ci.Extractor = (string)root.Attribute("extractor");
 
             if (root.Element(CgNs + "title") != null)
+            {
                 ci.Title = (string)root.Element(CgNs + "title");
+            }
 
             XElement @ref = root.Element(CgNs + "ref");
             if (@ref != null)
@@ -198,20 +230,26 @@ namespace JarrettVance.ChapterTools
             }
 
             if (root.Attribute("confirmations") != null)
+            {
                 ci.Confirmations = (int)root.Attribute("confirmations");
-
+            }
 
             XElement src = root.Element(CgNs + "source");
             if (src != null)
             {
                 ci.SourceName = (string)src.Element(CgNs + "name");
                 if (src.Element(CgNs + "type") != null)
+                {
                     ci.SourceType = (string)src.Element(CgNs + "type");
+                }
+
                 ci.SourceHash = (string)src.Element(CgNs + "hash");
                 ci.FramesPerSecond = Convert.ToDouble(src.Element(CgNs + "fps").Value, new System.Globalization.NumberFormatInfo());
                 ci.Duration = TimeSpan.Parse(src.Element(CgNs + "duration").Value);
                 if (src.Element(CgNs + "volume") != null)
+                {
                     ci.VolumeName = (string)src.Element(CgNs + "volume");
+                }
             }
 
             ci.Chapters = root.Element(CgNs + "chapters").Elements(CgNs + "chapter")
@@ -232,9 +270,20 @@ namespace JarrettVance.ChapterTools
         public XElement ToXElement()
         {
             var reference = new XElement(CgNs + "ref");
-            if (ChapterSetId.HasValue) reference.Add(new XElement(CgNs + "chapterSetId", ChapterSetId));
-            if (MovieDbId.HasValue) reference.Add(new XElement(CgNs + "movieDbId", MovieDbId));
-            if (ImdbId != null) reference.Add(new XElement(CgNs + "imdbId", ImdbId));
+            if (ChapterSetId.HasValue)
+            {
+                reference.Add(new XElement(CgNs + "chapterSetId", ChapterSetId));
+            }
+
+            if (MovieDbId.HasValue)
+            {
+                reference.Add(new XElement(CgNs + "movieDbId", MovieDbId));
+            }
+
+            if (ImdbId != null)
+            {
+                reference.Add(new XElement(CgNs + "imdbId", ImdbId));
+            }
 
             return new XElement(new XElement(CgNs + "chapterInfo",
               new XAttribute(XNamespace.Xml + "lang", LangCode),

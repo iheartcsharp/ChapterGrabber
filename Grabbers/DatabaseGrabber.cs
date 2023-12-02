@@ -37,7 +37,10 @@ namespace JarrettVance.ChapterTools.Grabbers
                             Time = chapterInfo.Chapters[i].Time
                         };
                     }
-                    else Trace.WriteLine("Chapter was ignored because it doesn't fit in current chapter set.");
+                    else
+                    {
+                        Trace.WriteLine("Chapter was ignored because it doesn't fit in current chapter set.");
+                    }
                 }
             }
             else

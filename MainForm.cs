@@ -79,7 +79,9 @@ namespace JarrettVance.ChapterTools
             //}
 
             if (Settings.Default.RecentFiles == null)
+            {
                 Settings.Default.RecentFiles = new StringCollection();
+            }
 
             miIgnoreShortLastChapter.Checked = Settings.Default.IgnoreShortLastChapter;
             miImportDurations.Checked = Settings.Default.ImportDurations;
@@ -127,10 +129,15 @@ namespace JarrettVance.ChapterTools
             }
             //#endif
 
-            if (!string.IsNullOrEmpty(StartupFile)) OpenFile(StartupFile);
+            if (!string.IsNullOrEmpty(StartupFile))
+            {
+                OpenFile(StartupFile);
+            }
 
             if (Settings.Default.AutoCheckForUpdate)
+            {
                 ThreadPool.QueueUserWorkItem((w) => Updater.CheckForUpdate(ShowUpdateDialog));
+            }
         }
 
         void ShowUpdateDialog(Version appVersion, Version newVersion, XDocument doc)
@@ -247,8 +254,11 @@ namespace JarrettVance.ChapterTools
             {
                 string ext = Path.GetExtension(saveFileDialog.FileName).ToLower();
                 if (ext == ".xml")
+                {
                     pgc.SaveXml(saveFileDialog.FileName);
+                }
                 else if (ext == ".txt")
+                {
                     switch (saveFileDialog.FilterIndex)
                     {
                         case 4: pgc.SaveTsmuxerMeta(saveFileDialog.FileName); break;
@@ -257,8 +267,12 @@ namespace JarrettVance.ChapterTools
                         case 7: pgc.SaveTimecodes(saveFileDialog.FileName); break;
                         default: pgc.SaveText(saveFileDialog.FileName); break;
                     }
+                }
                 else
+                {
                     pgc.Save(saveFileDialog.FileName);
+                }
+
                 Settings.Default.LastSaveExt = ext;
                 Settings.Default.Save();
             }
@@ -277,7 +291,12 @@ namespace JarrettVance.ChapterTools
                     if (Settings.Default.AutoUseDatabase && pgc.SourceHash != null)
                     {
                         foreach (ChapterGrabber g in ChapterGrabber.Grabbers)
-                            if (g.SupportsUpload) g.Upload(ci);
+                        {
+                            if (g.SupportsUpload)
+                            {
+                                g.Upload(ci);
+                            }
+                        }
                     }
                     dbWait = false;
                     Invoke(new Action(() => picDb.Visible = titleWait || dbWait));
@@ -319,12 +338,16 @@ namespace JarrettVance.ChapterTools
             try
             {
                 if (pgc.Chapters.Count == 0)
+                {
                     throw new Exception("There are no chapters to import names into.");
+                }
 
                 //get clipboard
                 IDataObject iData = Clipboard.GetDataObject();
                 if (!iData.GetDataPresent(DataFormats.Text))
+                {
                     throw new Exception("There is no valid text to copy from the clipboard.");
+                }
 
                 Grabber.ImportFromClipboard(pgc.Chapters, (String)iData.GetData(DataFormats.Text) + "\n", this.miImportDurations.Checked);
 
@@ -344,14 +367,19 @@ namespace JarrettVance.ChapterTools
             StringCollection files = Settings.Default.RecentFiles;
 
             //clear existing entries of this file
-            while (files.IndexOf(file) >= 0) files.RemoveAt(files.IndexOf(file));
+            while (files.IndexOf(file) >= 0)
+            {
+                files.RemoveAt(files.IndexOf(file));
+            }
 
             //insert at beginning
             files.Insert(0, file);
 
             //truncate pass max entries
             while (files.Count > Settings.Default.MaxRecentFiles)
+            {
                 files.RemoveAt(Settings.Default.MaxRecentFiles);
+            }
 
             Settings.Default.RecentFiles = files; //?
             RefreshRecent();
@@ -394,15 +422,25 @@ namespace JarrettVance.ChapterTools
             ChapterExtractor ex = null;
             string fileLower = file.ToLower();
             if (fileLower.EndsWith("txt"))
+            {
                 ex = new TextExtractor();
+            }
             else if (fileLower.EndsWith("xpl"))
+            {
                 ex = new XplExtractor();
+            }
             else if (fileLower.EndsWith("ifo"))
+            {
                 ex = new Ifo2Extractor();
+            }
             else if (fileLower.EndsWith("mpls"))
+            {
                 ex = new MplsExtractor();
+            }
             else if (fileLower.EndsWith("xml"))
+            {
                 throw new Exception("Format not yet supported.");
+            }
             else if (fileLower.EndsWith("chapters"))
             {
                 List<ChapterInfo> ret = new List<ChapterInfo>();
@@ -425,8 +463,16 @@ namespace JarrettVance.ChapterTools
             {
                 List<ChapterInfo> temp = ReadPgcListFromFile(file);
                 pgc = temp[0];
-                if (pgc.FramesPerSecond == 0) pgc.FramesPerSecond = Settings.Default.DefaultFps;
-                if (pgc.LangCode == null) pgc.LangCode = Settings.Default.DefaultLangCode;
+                if (pgc.FramesPerSecond == 0)
+                {
+                    pgc.FramesPerSecond = Settings.Default.DefaultFps;
+                }
+
+                if (pgc.LangCode == null)
+                {
+                    pgc.LangCode = Settings.Default.DefaultLangCode;
+                }
+
                 AutoLoadNames();
 
                 FreshChapterView();
@@ -458,11 +504,13 @@ namespace JarrettVance.ChapterTools
                         if (pgc.NamesNeedPopulated())
                         {
                             foreach (ChapterGrabber g in ChapterGrabber.Grabbers)
+                            {
                                 if (g.SupportsHash)
                                 {
                                     g.PopulateNames(pgc.SourceHash, pgc);
                                     FreshChapterView();
                                 }
+                            }
                         }
                     }
                     dbWait = false;
@@ -490,7 +538,9 @@ namespace JarrettVance.ChapterTools
                     if (pgc.Duration != TimeSpan.Zero && miIgnoreShortLastChapter.Checked &&
                       c.Equals(pgc.Chapters.Last()) && (pgc.Duration.Add(-c.Time).TotalSeconds <
                       Settings.Default.ShortChapterSeconds))
+                    {
                         continue;
+                    }
 
                     listChapters.Items.Add(new ListViewItem(new string[] { c.Time.ToShortString(), c.Name }));
                 }
@@ -528,13 +578,20 @@ namespace JarrettVance.ChapterTools
 
         private void listChapters_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (listChapters.Items.Count < 1) return;
+            if (listChapters.Items.Count < 1)
+            {
+                return;
+            }
 
             txtChapterName.TextChanged -= new System.EventHandler(this.txtChapter_TextChanged);
             txtChapterTime.TextChanged -= new System.EventHandler(this.txtChapter_TextChanged);
             ListView lv = (ListView)sender;
 
-            if (lv.SelectedItems.Count == 1) intIndex = lv.SelectedItems[0].Index;
+            if (lv.SelectedItems.Count == 1)
+            {
+                intIndex = lv.SelectedItems[0].Index;
+            }
+
             if (pgc.Chapters.Count > 0)
             {
                 txtChapterTime.Text = pgc.Chapters[intIndex].Time.ToShortString();
@@ -596,14 +653,26 @@ namespace JarrettVance.ChapterTools
                     FreshChapterView();
                     break;
                 case "btnDelete":
-                    if (listChapters.Items.Count < 1 || pgc.Chapters.Count < 1) return;
+                    if (listChapters.Items.Count < 1 || pgc.Chapters.Count < 1)
+                    {
+                        return;
+                    }
+
                     intIndex = listChapters.SelectedIndices[0];
                     pgc.Chapters.Remove(pgc.Chapters[intIndex]);
-                    if (intIndex != 0) intIndex--;
+                    if (intIndex != 0)
+                    {
+                        intIndex--;
+                    }
+
                     FreshChapterView();
                     break;
                 case "btnUp":
-                    if (pgc.Chapters.Count < 2 || intIndex < 1) return;
+                    if (pgc.Chapters.Count < 2 || intIndex < 1)
+                    {
+                        return;
+                    }
+
                     name = pgc.Chapters[intIndex].Name;
                     pgc.Chapters[intIndex] = new ChapterEntry() { Name = pgc.Chapters[intIndex - 1].Name, Time = pgc.Chapters[intIndex].Time };
                     pgc.Chapters[intIndex - 1] = new ChapterEntry() { Name = name, Time = pgc.Chapters[intIndex - 1].Time };
@@ -611,7 +680,11 @@ namespace JarrettVance.ChapterTools
                     FreshChapterView();
                     break;
                 case "btnDn":
-                    if (pgc.Chapters.Count < 2 || intIndex >= pgc.Chapters.Count - 1) return;
+                    if (pgc.Chapters.Count < 2 || intIndex >= pgc.Chapters.Count - 1)
+                    {
+                        return;
+                    }
+
                     name = pgc.Chapters[intIndex].Name;
                     pgc.Chapters[intIndex] = new ChapterEntry() { Name = pgc.Chapters[intIndex + 1].Name, Time = pgc.Chapters[intIndex].Time };
                     pgc.Chapters[intIndex + 1] = new ChapterEntry() { Name = name, Time = pgc.Chapters[intIndex + 1].Time };
@@ -638,7 +711,9 @@ namespace JarrettVance.ChapterTools
             try
             {
                 if (string.IsNullOrEmpty(txtTitle.Text))
+                {
                     throw new Exception("You must supply a title to search for chapter names.");
+                }
 
                 Action<List<SearchResult>> a = (titles) =>
                 {
@@ -647,6 +722,7 @@ namespace JarrettVance.ChapterTools
                         titles.Select(x => new SearchResultItem(x)).ToArray());
                     var items = flowResults.Controls.OfType<SearchResultItem>();
                     foreach (var item in items)
+                    {
                         item.OnSelected += (s, e) =>
                         {
 
@@ -656,9 +732,14 @@ namespace JarrettVance.ChapterTools
 
                                 // unselect others
                                 foreach (var x in items.Where(x => x != s))
+                                {
                                     x.Unselect();
+                                }
 
-                                if (grabber == null) return;
+                                if (grabber == null)
+                                {
+                                    return;
+                                }
 
                                 var result = (s as SearchResultItem).Tag as SearchResult;
 
@@ -675,6 +756,7 @@ namespace JarrettVance.ChapterTools
                                 Cursor = Cursors.Default;
                             }
                         };
+                    }
 
                     //lstResults.Items.Clear();
                     //lstResults.Items.AddRange(titles.ToArray());
@@ -793,8 +875,9 @@ namespace JarrettVance.ChapterTools
                   null;
 
                 if (ex == null)
+                {
                     throw new Exception("The location was not detected as DVD, HD-DVD or Blu-Ray.");
-
+                }
 
                 using (StreamSelectDialog frm = new StreamSelectDialog(ex))
                 {
@@ -804,8 +887,16 @@ namespace JarrettVance.ChapterTools
                         Settings.Default.LastOpenDir = new DirectoryPathAbsolute(path).Path;
                         Settings.Default.Save();
                         pgc = frm.ProgramChain;
-                        if (pgc.FramesPerSecond == 0) pgc.FramesPerSecond = Settings.Default.DefaultFps;
-                        if (pgc.LangCode == null) pgc.LangCode = Settings.Default.DefaultLangCode;
+                        if (pgc.FramesPerSecond == 0)
+                        {
+                            pgc.FramesPerSecond = Settings.Default.DefaultFps;
+                        }
+
+                        if (pgc.LangCode == null)
+                        {
+                            pgc.LangCode = Settings.Default.DefaultLangCode;
+                        }
+
                         AutoLoadNames();
                         FreshChapterView();
                     }
@@ -864,16 +955,37 @@ namespace JarrettVance.ChapterTools
                         txtTitle.TextChanged -= new EventHandler(txtTitle_TextChanged);
                         txtTitle.Text = pgc.Title;
                         txtTitle.TextChanged += new EventHandler(txtTitle_TextChanged);
-                        if (((ToolStripItem)o).Image != null) btnTitles.Image = Properties.Resources.apply_good;
+                        if (((ToolStripItem)o).Image != null)
+                        {
+                            btnTitles.Image = Properties.Resources.apply_good;
+                        }
                     });
             }
             int num = -1;
-            if (titles.Count > 0 && titles[0].Value == pgc.Title) SetGoodTitle();
-            else if (int.TryParse(pgc.Title, out num)) SetBadTitle();
-            else if (pgc.Title.StartsWith("VTS_")) SetBadTitle();
-            else if (pgc.Title == "Main Movie") SetBadTitle();
-            else if (titles.Where(t => t.Value.Contains(pgc.Title)).Count() > 0) SetOkTitle();
-            else SetBadTitle();
+            if (titles.Count > 0 && titles[0].Value == pgc.Title)
+            {
+                SetGoodTitle();
+            }
+            else if (int.TryParse(pgc.Title, out num))
+            {
+                SetBadTitle();
+            }
+            else if (pgc.Title.StartsWith("VTS_"))
+            {
+                SetBadTitle();
+            }
+            else if (pgc.Title == "Main Movie")
+            {
+                SetBadTitle();
+            }
+            else if (titles.Where(t => t.Value.Contains(pgc.Title)).Count() > 0)
+            {
+                SetOkTitle();
+            }
+            else
+            {
+                SetBadTitle();
+            }
 
             titleWait = false;
             picDb.Visible = titleWait || dbWait;
@@ -905,9 +1017,13 @@ namespace JarrettVance.ChapterTools
             UpdateStatus status = Updater.CheckForUpdate(ShowUpdateDialog);
 
             if (status == UpdateStatus.UpdateFailed)
+            {
                 MessageBox.Show(this, "Failed to check for update.  Please ty again later.", "Warning");
+            }
             else if (status == UpdateStatus.NoUpdate)
+            {
                 MessageBox.Show(this, "There are no updates available at this time.", "Update Check");
+            }
         }
 
         private void miAutoCheck_Click(object sender, EventArgs e)
@@ -927,7 +1043,9 @@ namespace JarrettVance.ChapterTools
         private void miDatabaseCredentials_Click(object sender, EventArgs e)
         {
             using (DatabaseCredentialsDialog d = new DatabaseCredentialsDialog())
+            {
                 d.ShowDialog(this);
+            }
         }
 
         private void txtChapterName_KeyDown(object sender, KeyEventArgs e)
@@ -997,7 +1115,11 @@ namespace JarrettVance.ChapterTools
                 {
                     for (int i = 0; i < this.pgc.Chapters.Count; i++)
                     {
-                        if (i == 0 && this.pgc.Chapters[i].Time.TotalSeconds == 0) continue;
+                        if (i == 0 && this.pgc.Chapters[i].Time.TotalSeconds == 0)
+                        {
+                            continue;
+                        }
+
                         this.pgc.Chapters[i] = new ChapterEntry()
                         {
                             Name = this.pgc.Chapters[i].Name,

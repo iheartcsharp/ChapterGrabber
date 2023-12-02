@@ -38,8 +38,16 @@ namespace JarrettVance.ChapterTools.Extractors
                     int tickBaseDivisor = (int?)title.Attribute("tickBaseDivisor") ?? 1;
                     pgc.Duration = GetTimeSpan((string)title.Attribute("titleDuration"), timeBase, tickBase, tickBaseDivisor);
                     string titleName = Path.GetFileNameWithoutExtension(location);
-                    if (title.Attribute("id") != null) titleName = (string)title.Attribute("id");
-                    if (title.Attribute("displayName") != null) titleName = (string)title.Attribute("displayName");
+                    if (title.Attribute("id") != null)
+                    {
+                        titleName = (string)title.Attribute("id");
+                    }
+
+                    if (title.Attribute("displayName") != null)
+                    {
+                        titleName = (string)title.Attribute("displayName");
+                    }
+
                     pgc.Title = titleName;
                     foreach (XElement chapter in title.Element(ns + "ChapterList").Elements(ns + "Chapter"))
                     {

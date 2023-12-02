@@ -88,7 +88,10 @@ namespace JarrettVance.ChapterTools
 
         public static List<KeyValuePair<int, string>> SuggestTitles(string title)
         {
-            if (string.IsNullOrEmpty(title)) return new List<KeyValuePair<int, string>>();
+            if (string.IsNullOrEmpty(title))
+            {
+                return new List<KeyValuePair<int, string>>();
+            }
 
             return Grabber.FilterMovieTitles(Grabber.GoogleTitle(title))
                 .GroupBy(k => k.Value).Select(k => new KeyValuePair<int, string>(k.Sum(t => t.Key), k.Key))
@@ -99,13 +102,34 @@ namespace JarrettVance.ChapterTools
         {
             foreach (string t in titles)
             {
-                if (t.IndexOf(" (20") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (20")));
-                else if (t.IndexOf(" (19") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (19")));
-                else if (t.IndexOf(" (film) - Wikipedia") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (film) - Wikipedia")));
-                else if (t.IndexOf(" - Wikipedia") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" - Wikipedia")));
-                else if (t.IndexOf(" Movie Reviews") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" Movie Reviews")));
-                else if (t.IndexOf(" - YouTube") > 0) yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" - YouTube")));
-                else yield return new KeyValuePair<int, string>(0, t);
+                if (t.IndexOf(" (20") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (20")));
+                }
+                else if (t.IndexOf(" (19") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (19")));
+                }
+                else if (t.IndexOf(" (film) - Wikipedia") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" (film) - Wikipedia")));
+                }
+                else if (t.IndexOf(" - Wikipedia") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" - Wikipedia")));
+                }
+                else if (t.IndexOf(" Movie Reviews") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" Movie Reviews")));
+                }
+                else if (t.IndexOf(" - YouTube") > 0)
+                {
+                    yield return new KeyValuePair<int, string>(1, t.Substring(0, t.IndexOf(" - YouTube")));
+                }
+                else
+                {
+                    yield return new KeyValuePair<int, string>(0, t);
+                }
             }
         }
 
@@ -145,7 +169,9 @@ namespace JarrettVance.ChapterTools
         {
             clipboard = clipboard.Replace("\t", string.Empty);
             for (int i = 0; i < chapters.Count; i++)
+            {
                 chapters[i] = new ChapterEntry() { Time = chapters[i].Time, Name = ExtractFromCopy(clipboard, i + 1, includeDuration) };
+            }
         }
 
         //  public static bool ImportFromWeb(List<Chapter> chapters, string title, string ean, bool includeDuration)
@@ -209,14 +235,30 @@ namespace JarrettVance.ChapterTools
         private static string ExtractFromHtml(string html, int chapterNum, bool includeDuration)
         {
             int searchAt = html.IndexOf("<a name=\"SCN\"><b>Scene Index</b></a>");
-            if (searchAt == -1) return "Chapter " + chapterNum.ToString();
+            if (searchAt == -1)
+            {
+                return "Chapter " + chapterNum.ToString();
+            }
+
             string lookfor = "<br><br> " + chapterNum.ToString() + ". ";
-            if (chapterNum > 9) lookfor = "<br><br>" + chapterNum.ToString() + ". ";
+            if (chapterNum > 9)
+            {
+                lookfor = "<br><br>" + chapterNum.ToString() + ". ";
+            }
+
             int nameAt = html.IndexOf(lookfor, searchAt);
             int nameTo = html.IndexOf("<br>", nameAt + 5);
-            if (nameAt == -1 || nameTo == -1) return "ChapterName " + chapterNum.ToString();
+            if (nameAt == -1 || nameTo == -1)
+            {
+                return "ChapterName " + chapterNum.ToString();
+            }
+
             string name = html.Substring(nameAt, nameTo - nameAt).Replace(lookfor, String.Empty);
-            if (!includeDuration && name.LastIndexOf('[') > 1) name = name.Substring(0, name.LastIndexOf('[') - 1);
+            if (!includeDuration && name.LastIndexOf('[') > 1)
+            {
+                name = name.Substring(0, name.LastIndexOf('[') - 1);
+            }
+
             return name;
         }
 
@@ -224,15 +266,29 @@ namespace JarrettVance.ChapterTools
         {
             int nameAt = clipboard.IndexOf(chapterNum.ToString() + ". ");
             int nameTo = clipboard.IndexOf("\n", nameAt + 2 + chapterNum.ToString().Length);
-            if (nameAt == -1 || nameTo == -1) return "Chapter " + chapterNum.ToString();
+            if (nameAt == -1 || nameTo == -1)
+            {
+                return "Chapter " + chapterNum.ToString();
+            }
+
             string name = clipboard.Substring(nameAt + 2 + chapterNum.ToString().Length, nameTo - (nameAt + 2 + chapterNum.ToString().Length));
-            if (!includeDuration) return name.RemoveDuration();
-            else return name.Trim();
+            if (!includeDuration)
+            {
+                return name.RemoveDuration();
+            }
+            else
+            {
+                return name.Trim();
+            }
         }
 
         public static string RemoveDuration(this string val)
         {
-            if (val.LastIndexOf('[') > 1) val = val.Substring(0, val.LastIndexOf('[') - 1);
+            if (val.LastIndexOf('[') > 1)
+            {
+                val = val.Substring(0, val.LastIndexOf('[') - 1);
+            }
+
             return val.Trim();
         }
     }

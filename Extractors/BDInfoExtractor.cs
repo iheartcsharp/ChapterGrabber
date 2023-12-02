@@ -62,7 +62,10 @@ namespace JarrettVance.ChapterTools.Extractors
                             break;
                         }
                     }
-                    if (pgc.FramesPerSecond != 0) break;
+                    if (pgc.FramesPerSecond != 0)
+                    {
+                        break;
+                    }
                 }
                 catch (Exception ex)
                 {
