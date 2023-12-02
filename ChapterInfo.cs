@@ -36,6 +36,7 @@ namespace JarrettVance.ChapterTools
             }
 
             string name = Chapters[0].Name ?? string.Empty;
+
             // assume either blank or "Chapter 1"
             var charCount = Chapters
                 .Select(x => x.Name ?? string.Empty)
@@ -105,7 +106,7 @@ namespace JarrettVance.ChapterTools
 
             for (int i = 0; i < Chapters.Count; i++)
             {
-                count = count + 2F;
+                count += 2F;
                 if (i < other.Chapters.Count)
                 {
                     if (Chapters[i].Name != null && Chapters[i].Name.Equals(other.Chapters[i].Name, StringComparison.InvariantCultureIgnoreCase))
@@ -125,7 +126,7 @@ namespace JarrettVance.ChapterTools
 
         public override string ToString()
         {
-            return string.Format("{0}, {1}, {2} chapter(s)", SourceName, Duration.ToShortString(), Chapters.Count);
+            return $"{SourceName}, {Duration.ToShortString()}, {Chapters.Count} chapter(s)";
         }
 
         public void ChangeFps(double fps)
@@ -144,8 +145,9 @@ namespace JarrettVance.ChapterTools
 
         public void SaveText(string filename)
         {
-            List<string> lines = new List<string>();
-            int i = 0;
+            var lines = new List<string>();
+            var i = 0;
+
             foreach (ChapterEntry c in Chapters)
             {
                 i++;
@@ -153,73 +155,59 @@ namespace JarrettVance.ChapterTools
                 lines.Add("CHAPTER" + i.ToString("00") + "NAME=" + c.Name);
             }
 
-            File.WriteAllLines(filename, lines.ToArray());
+            File.WriteAllLines(filename, lines);
         }
 
         public void SaveQpfile(string filename)
         {
-            List<string> lines = new List<string>();
-            foreach (ChapterEntry c in Chapters)
-            {
-                lines.Add(string.Format("{0} I -1", (long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)));
-            }
+            var lines = Chapters.Select(c => $"{(long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)} I -1");
 
-            File.WriteAllLines(filename, lines.ToArray());
+            File.WriteAllLines(filename, lines);
         }
 
         public void SaveCelltimes(string filename)
         {
-            List<string> lines = new List<string>();
-            foreach (ChapterEntry c in Chapters)
-            {
-                lines.Add(((long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)).ToString());
-            }
+            var lines = Chapters.Select(c => ((long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)).ToString());
 
-            File.WriteAllLines(filename, lines.ToArray());
+            File.WriteAllLines(filename, lines);
         }
 
         public void SaveTsmuxerMeta(string filename)
         {
-            string text = "--custom-" + Environment.NewLine + "chapters=";
-            foreach (ChapterEntry c in Chapters)
-            {
-                text += c.Time.ToShortString() + ";";
-            }
+            var lines = Chapters.Select(c => $"--custom-{Environment.NewLine}chapters={c.Time.ToShortString()}");
+            var text = string.Join(";", lines);
 
-            text = text.Substring(0, text.Length - 1);
             File.WriteAllText(filename, text);
         }
 
         public void SaveTimecodes(string filename)
         {
-            List<string> lines = new List<string>();
-            foreach (ChapterEntry c in Chapters)
-            {
-                lines.Add(c.Time.ToShortString());
-            }
+            var lines = Chapters.Select(c => c.Time.ToShortString());
 
-            File.WriteAllLines(filename, lines.ToArray());
+            File.WriteAllLines(filename, lines);
         }
 
         public static readonly XNamespace CgNs = "http://jvance.com/2008/ChapterGrabber";
 
         public static ChapterInfo Load(XmlReader r)
         {
-            XDocument doc = XDocument.Load(r);
+            var doc = XDocument.Load(r);
             return Load(doc.Root);
         }
 
         public static ChapterInfo Load(string filename)
         {
-            XDocument doc = XDocument.Load(filename);
+            var doc = XDocument.Load(filename);
             return Load(doc.Root);
         }
 
         public static ChapterInfo Load(XElement root)
         {
-            ChapterInfo ci = new ChapterInfo();
-            ci.LangCode = (string)root.Attribute(XNamespace.Xml + "lang");
-            ci.Extractor = (string)root.Attribute("extractor");
+            var ci = new ChapterInfo
+            {
+                LangCode = (string)root.Attribute(XNamespace.Xml + "lang"),
+                Extractor = (string)root.Attribute("extractor")
+            };
 
             if (root.Element(CgNs + "title") != null)
             {
