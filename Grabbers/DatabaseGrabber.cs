@@ -57,15 +57,15 @@ namespace JarrettVance.ChapterTools.Grabbers
             searchResults = searchXml.Root.Elements(ChapterInfo.CgNs + "chapterInfo").Select(x => ChapterInfo.Load(x)).ToList();
 
             var titles = searchResults.Select(x => new SearchResult()
-                            {
-                                Id = (x.ChapterSetId ?? 0).ToString(),
-                                Name = x.Title,
-                                Duration = x.Duration,
-                                Count = x.Chapters.Count,
-                                Type = x.SourceType,
-                                Relevance = x.Confirmations,
-                                HasNames = x.HasNames(),
-                            });
+            {
+                Id = (x.ChapterSetId ?? 0).ToString(),
+                Name = x.Title,
+                Duration = x.Duration,
+                Count = x.Chapters.Count,
+                Type = x.SourceType,
+                Relevance = x.Confirmations,
+                HasNames = x.HasNames(),
+            });
             OnSearchComplete();
             return titles.ToList();
         }
@@ -137,7 +137,7 @@ namespace JarrettVance.ChapterTools.Grabbers
             catch (Exception ex)
             {
                 Trace.WriteLine(ex);
-            }            
+            }
         }
     }
 }

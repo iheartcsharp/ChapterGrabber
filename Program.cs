@@ -47,7 +47,7 @@ namespace JarrettVance.ChapterTools
                 {
                     if (extension[0] != '.')
                     {
-                        extension = "."+extension;
+                        extension = "." + extension;
                     }
 
                     // register the extension, if necessary

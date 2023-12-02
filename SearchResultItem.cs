@@ -37,7 +37,7 @@ namespace JarrettVance.ChapterTools
             this.Tag = search;
 
             lblName.Text = search.Name;
-            
+
             if (search.Type != "Unknown")
             {
                 lblSourceType.Text = search.Type;

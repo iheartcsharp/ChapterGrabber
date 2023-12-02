@@ -16,25 +16,25 @@ namespace BDInfo
 
         public List<double> Chapters = new List<double>();
 
-        public Dictionary<ushort, TSStream> Streams = 
+        public Dictionary<ushort, TSStream> Streams =
             new Dictionary<ushort, TSStream>();
         public List<TSStreamClip> StreamClips =
             new List<TSStreamClip>();
         public List<Dictionary<ushort, TSStream>> AngleStreams =
             new List<Dictionary<ushort, TSStream>>();
         public int AngleCount = 0;
-      /*
-        public List<TSStream> SortedStreams = 
-            new List<TSStream>();
-        public List<TSVideoStream> VideoStreams = 
-            new List<TSVideoStream>();
-        public List<TSAudioStream> AudioStreams = 
-            new List<TSAudioStream>();
-        public List<TSTextStream> TextStreams = 
-            new List<TSTextStream>();
-        public List<TSGraphicsStream> GraphicsStreams = 
-            new List<TSGraphicsStream>();
-      */
+        /*
+          public List<TSStream> SortedStreams = 
+              new List<TSStream>();
+          public List<TSVideoStream> VideoStreams = 
+              new List<TSVideoStream>();
+          public List<TSAudioStream> AudioStreams = 
+              new List<TSAudioStream>();
+          public List<TSTextStream> TextStreams = 
+              new List<TSTextStream>();
+          public List<TSGraphicsStream> GraphicsStreams = 
+              new List<TSGraphicsStream>();
+        */
         public TSPlaylistFile(
             FileInfo fileInfo)
         {
@@ -167,8 +167,8 @@ namespace BDInfo
         }
 
         public void Scan()
-            //Dictionary<string, TSStreamFile> streamFiles,
-            //Dictionary<string, TSStreamClipFile> streamClipFiles)
+        //Dictionary<string, TSStreamFile> streamFiles,
+        //Dictionary<string, TSStreamClipFile> streamClipFiles)
         {
             FileStream fileStream = null;
             BinaryReader fileReader = null;
@@ -193,9 +193,9 @@ namespace BDInfo
 
                 byte[] fileType = new byte[8];
                 Array.Copy(data, 0, fileType, 0, fileType.Length);
-                
+
                 FileType = ASCIIEncoding.ASCII.GetString(fileType);
-                if ((FileType != "MPLS0100" && FileType != "MPLS0200") 
+                if ((FileType != "MPLS0100" && FileType != "MPLS0200")
                     /*|| data[45] != 1*/)
                 {
                     throw new Exception(string.Format(
@@ -221,7 +221,7 @@ namespace BDInfo
                     ((int)data[playlistIndex + 3]);
 
                 byte[] playlistData = new byte[playlistLength];
-                Array.Copy(data, playlistIndex + 4, 
+                Array.Copy(data, playlistIndex + 4,
                     playlistData, 0, playlistData.Length);
 
                 streamFileCount =
@@ -232,12 +232,12 @@ namespace BDInfo
 #endif
                 List<TSStreamClip> chapterClips = new List<TSStreamClip>();
                 int streamFileOffset = 6;
-                for (int streamFileIndex = 0; 
-                    streamFileIndex < streamFileCount; 
+                for (int streamFileIndex = 0;
+                    streamFileIndex < streamFileCount;
                     streamFileIndex++)
                 {
                     byte[] streamFileNameData = new byte[5];
-                    Array.Copy(playlistData, streamFileOffset + 2, 
+                    Array.Copy(playlistData, streamFileOffset + 2,
                         streamFileNameData, 0, streamFileNameData.Length);
 
                     //TSStreamFile streamFile = null;
@@ -261,8 +261,8 @@ namespace BDInfo
                         ASCIIEncoding.ASCII.GetString(streamFileNameData));
                     string streamClipFilePath = Path.Combine(Path.Combine(FileInfo.Directory.Parent.FullName, "CLIPINF"),
                       streamClipFileName);
-                    if (File.Exists(streamClipFilePath) && !streamClipFiles.ContainsKey(streamClipFileName)) 
-                      streamClipFiles.Add(streamClipFileName, new TSStreamClipFile(new FileInfo(streamClipFilePath)));
+                    if (File.Exists(streamClipFilePath) && !streamClipFiles.ContainsKey(streamClipFileName))
+                        streamClipFiles.Add(streamClipFileName, new TSStreamClipFile(new FileInfo(streamClipFilePath)));
 
                     if (streamClipFiles.ContainsKey(streamClipFileName))
                     {
@@ -275,7 +275,7 @@ namespace BDInfo
                         //    "Playlist {0} referenced missing file {1}.",
                         //    FileInfo.Name, streamClipFileName));
                     }
-                    
+
                     byte condition = (byte)
                         (playlistData[streamFileOffset + 12] & 0xF);
 
@@ -320,9 +320,9 @@ namespace BDInfo
                         for (int angle = 0; angle < (angleCount - 1); angle++)
                         {
                             byte[] angleFileNameData = new byte[5];
-                            int angleOffset = 
+                            int angleOffset =
                                 streamFileOffset + 26 + ((angle + 1) * 10);
-                            Array.Copy(playlistData, angleOffset, 
+                            Array.Copy(playlistData, angleOffset,
                                 angleFileNameData, 0, angleFileNameData.Length);
 
                             //TSStreamFile angleFile = null;
@@ -389,22 +389,22 @@ namespace BDInfo
                     ((int)data[chaptersIndex + 2] << 8) +
                     ((int)data[chaptersIndex + 3]);
 
-                byte[] chapterData = 
+                byte[] chapterData =
                     new byte[chaptersLength];
-                Array.Copy(data, chaptersIndex + 4, 
+                Array.Copy(data, chaptersIndex + 4,
                     chapterData, 0, chaptersLength);
 
-                int chapterCount = 
+                int chapterCount =
                     ((int)chapterData[0] << 8) + chapterData[1];
                 int chapterOffset = 2;
-                for (int chapterIndex = 0; 
-                    chapterIndex < chapterCount; 
+                for (int chapterIndex = 0;
+                    chapterIndex < chapterCount;
                     chapterIndex++)
                 {
                     if (chapterData[chapterOffset + 1] == 1)
                     {
                         int streamFileIndex =
-                            ((int)chapterData[chapterOffset + 2] << 8) + 
+                            ((int)chapterData[chapterOffset + 2] << 8) +
                             chapterData[chapterOffset + 3];
 
                         TSStreamClip streamClip = chapterClips[streamFileIndex];
@@ -639,7 +639,7 @@ namespace BDInfo
         //}
 
         public static int CompareVideoStreams(
-            TSVideoStream x, 
+            TSVideoStream x,
             TSVideoStream y)
         {
             if (x == null && y == null)
@@ -680,7 +680,7 @@ namespace BDInfo
         }
 
         public static int CompareAudioStreams(
-            TSAudioStream x, 
+            TSAudioStream x,
             TSAudioStream y)
         {
             if (x == y)

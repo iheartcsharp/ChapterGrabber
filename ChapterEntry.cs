@@ -23,17 +23,17 @@ using System;
 
 namespace JarrettVance.ChapterTools
 {
-	/// <summary>
-	/// Summary description for Chapter.
-	/// </summary>
-	public struct ChapterEntry
-	{
+    /// <summary>
+    /// Summary description for Chapter.
+    /// </summary>
+    public struct ChapterEntry
+    {
         public TimeSpan Time { get; set; }
         public string Name { get; set; }
         //public string Lang { get; set; }
         public override string ToString()
         {
-          return Time.ToShortString() + ": " + Name;
+            return Time.ToShortString() + ": " + Name;
         }
-	}
+    }
 }

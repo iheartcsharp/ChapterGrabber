@@ -28,7 +28,7 @@ namespace BDInfo
             //TSStreamFile streamFile,
             TSStreamClipFile streamClipFile)
         {
-          Name = streamClipFile.Name; //streamFile.Name;
+            Name = streamClipFile.Name; //streamFile.Name;
             //StreamFile = streamFile;
             StreamClipFile = streamClipFile;
             //FileSize = (ulong)StreamFile.FileInfo.Length;

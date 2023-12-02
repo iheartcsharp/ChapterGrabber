@@ -18,7 +18,7 @@ namespace JarrettVance.ChapterTools
 
         private void DatabaseCredentialsDialog_Load(object sender, EventArgs e)
         {
-            linkDatabase.Text = Settings.Default.DatabaseSite;            
+            linkDatabase.Text = Settings.Default.DatabaseSite;
             txtApiKey.Text = Settings.Default.DatabaseApiKey;
         }
 
@@ -35,7 +35,7 @@ namespace JarrettVance.ChapterTools
         {
             if (!IsValid() && this.DialogResult == DialogResult.OK)
             {
-                if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing || 
+                if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing ||
                     e.CloseReason == CloseReason.None)
                     e.Cancel = true;
             }

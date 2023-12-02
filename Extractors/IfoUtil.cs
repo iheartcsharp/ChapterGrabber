@@ -27,7 +27,7 @@ namespace JarrettVance.ChapterTools
         {
             return (long)Math.Round(fps * time.TotalSeconds);
         }
-        
+
         static string TwoLong(int val) { return string.Format("{0:D2}", val); }
 
         static int AsHex(int val)
@@ -81,7 +81,7 @@ namespace JarrettVance.ChapterTools
         {
             short? frames = GetFrames(playbackBytes[3]);
             int fpsMask = playbackBytes[3] >> 6;
-            fps = fpsMask == 0x01 ? 25D : fpsMask == 0x03 ? (30D / 1.001D): 0;
+            fps = fpsMask == 0x01 ? 25D : fpsMask == 0x03 ? (30D / 1.001D) : 0;
             if (frames == null)
                 return null;
 
@@ -97,5 +97,5 @@ namespace JarrettVance.ChapterTools
             }
             catch { return null; }
         }
-   }
+    }
 }
