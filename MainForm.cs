@@ -323,7 +323,7 @@ namespace JarrettVance.ChapterTools
 
         void OnNew()
         {
-            txtTitle.Text = String.Empty;
+            txtTitle.Text = string.Empty;
             flowResults.Controls.Clear();
             menuTitles.Items.Clear();
             intIndex = 0;
@@ -352,7 +352,7 @@ namespace JarrettVance.ChapterTools
                     throw new Exception("There is no valid text to copy from the clipboard.");
                 }
 
-                Grabber.ImportFromClipboard(pgc.Chapters, (String)iData.GetData(DataFormats.Text) + "\n", this.miImportDurations.Checked);
+                Grabber.ImportFromClipboard(pgc.Chapters, (string)iData.GetData(DataFormats.Text) + "\n", this.miImportDurations.Checked);
 
                 FreshChapterView();
                 tsslStatus.Text = "Names successfully imported from clipboard.";

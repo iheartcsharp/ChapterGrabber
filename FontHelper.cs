@@ -14,13 +14,13 @@ namespace JarrettVance.ChapterTools
         static FontHelper()
         {
             sCustomFonts = new PrivateFontCollection();
-            sFamilies = new Dictionary<string, FontFamily>(
-                StringComparer.InvariantCultureIgnoreCase);
+            sFamilies = new Dictionary<string, FontFamily>(StringComparer.InvariantCultureIgnoreCase);
         }
 
         public static void RegisterFont(byte[] font)
         {
             var buffer = Marshal.AllocCoTaskMem(font.Length);
+
             Marshal.Copy(font, 0, buffer, font.Length);
             sCustomFonts.AddMemoryFont(buffer, font.Length);
         }
@@ -38,6 +38,7 @@ namespace JarrettVance.ChapterTools
             families.AddRange(sCustomFonts.Families);
 
             families.Sort((f1, f2) => { return f1.Name.CompareTo(f2.Name); });
+
             return families.ToArray();
         }
 
@@ -59,15 +60,11 @@ namespace JarrettVance.ChapterTools
             return sFamilies[family];
         }
 
-        public static Font Create(
-            string family,
-            float emSize,
-            FontStyle style = FontStyle.Regular,
-            GraphicsUnit unit = GraphicsUnit.Pixel)
+        public static Font Create(string family, float emSize, FontStyle style = FontStyle.Regular, GraphicsUnit unit = GraphicsUnit.Pixel)
         {
             var fam = GetFamily(family);
+
             return new Font(family, emSize, style, unit);
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace JarrettVance.ChapterTools
     {
         public string Title { get; set; }
         public int? ChapterSetId { get; set; }
-        public String ImdbId { get; set; }
+        public string ImdbId { get; set; }
         public int? MovieDbId { get; set; }
         public string Extractor { get; set; }
         public string LangCode { get; set; }

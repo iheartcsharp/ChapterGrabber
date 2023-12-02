@@ -26,6 +26,7 @@ namespace JarrettVance.ChapterTools
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Application.EnableVisualStyles();
             var f = new MainForm();
+
             if (args.Length > 0)
             {
                 f.StartupFile = args[0];
@@ -76,12 +77,12 @@ namespace JarrettVance.ChapterTools
                                 progIdKey.SetValue(string.Empty, description);
                                 using (RegistryKey defaultIcon = progIdKey.CreateSubKey("DefaultIcon"))
                                 {
-                                    defaultIcon.SetValue(string.Empty, String.Format("\"{0}\",{1}", iconFile, iconIdx));
+                                    defaultIcon.SetValue(string.Empty, string.Format("\"{0}\",{1}", iconFile, iconIdx));
                                 }
 
                                 using (RegistryKey command = progIdKey.CreateSubKey("shell\\open\\command"))
                                 {
-                                    command.SetValue(string.Empty, String.Format("\"{0}\" \"%1\"", executeable));
+                                    command.SetValue(string.Empty, string.Format("\"{0}\" \"%1\"", executeable));
                                 }
                             }
                         }

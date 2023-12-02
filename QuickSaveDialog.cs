@@ -26,7 +26,7 @@ namespace JarrettVance.ChapterTools
             lblStatus.Text = string.Empty;
             txtFolder.Text = path;
 
-            if (String.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
             {
                 lblStatus.Text = "Please choose a destination folder.";
                 btnDir.Focus();

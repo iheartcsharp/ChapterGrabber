@@ -26,8 +26,8 @@ namespace JarrettVance.ChapterTools.Extractors
 
             int num = 0;
             TimeSpan ts = new TimeSpan(0);
-            string time = String.Empty;
-            string name = String.Empty;
+            string time = string.Empty;
+            string name = string.Empty;
             bool onTime = true;
             string[] lines = File.ReadAllLines(location);
             foreach (string line in lines)
