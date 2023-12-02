@@ -43,6 +43,7 @@ namespace JarrettVance.ChapterTools
                         return titleAttribute.Title;
                     }
                 }
+
                 return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
@@ -64,6 +65,7 @@ namespace JarrettVance.ChapterTools
                 {
                     return "";
                 }
+
                 return ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
         }
@@ -77,6 +79,7 @@ namespace JarrettVance.ChapterTools
                 {
                     return "";
                 }
+
                 return ((AssemblyProductAttribute)attributes[0]).Product;
             }
         }
@@ -90,6 +93,7 @@ namespace JarrettVance.ChapterTools
                 {
                     return "";
                 }
+
                 return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
@@ -103,6 +107,7 @@ namespace JarrettVance.ChapterTools
                 {
                     return "";
                 }
+
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }

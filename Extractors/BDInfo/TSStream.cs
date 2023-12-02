@@ -530,6 +530,7 @@ namespace BDInfo
                         Height,
                         IsInterlaced ? "i" : "p");
                 }
+
                 if (FrameRateEnumerator > 0 &&
                     FrameRateDenominator > 0)
                 {
@@ -545,6 +546,7 @@ namespace BDInfo
                     }
 
                 }
+
                 if (AspectRatio == TSAspectRatio.ASPECT_4_3)
                 {
                     description += "4:3 / ";
@@ -553,14 +555,17 @@ namespace BDInfo
                 {
                     description += "16:9 / ";
                 }
+
                 if (EncodingProfile != null)
                 {
                     description += EncodingProfile + " / ";
                 }
+
                 if (description.EndsWith(" / "))
                 {
                     description = description.Substring(0, description.Length - 3);
                 }
+
                 return description;
             }
         }
@@ -624,6 +629,7 @@ namespace BDInfo
                 case TSSampleRate.SAMPLERATE_48_192:
                     return 192000;
             }
+
             return 0;
         }
 
@@ -653,17 +659,20 @@ namespace BDInfo
                             break;
                     }
                 }
+
                 if (AudioMode == TSAudioMode.Extended)
                 {
                     if (StreamType == TSStreamType.AC3_AUDIO)
                     {
                         description += "-EX";
                     }
+
                     if (StreamType == TSStreamType.DTS_AUDIO)
                     {
                         description += "-ES";
                     }
                 }
+
                 return description;
             }
         }
@@ -679,16 +688,19 @@ namespace BDInfo
                     description += string.Format(
                         " / {0:D} kHz", SampleRate / 1000);
                 }
+
                 if (BitRate > 0)
                 {
                     description += string.Format(
                         " / {0:D} kbps", (uint)Math.Round((double)BitRate / 1000));
                 }
+
                 if (BitDepth > 0)
                 {
                     description += string.Format(
                         " / {0:D}-bit", BitDepth);
                 }
+
                 if (ChannelCount == 2)
                 {
                     switch (AudioMode)
@@ -702,10 +714,12 @@ namespace BDInfo
                             break;
                     }
                 }
+
                 if (description.EndsWith(" / "))
                 {
                     description = description.Substring(0, description.Length - 3);
                 }
+
                 if (CoreStream != null)
                 {
                     string codec = "";
@@ -718,11 +732,13 @@ namespace BDInfo
                             codec = "DTS";
                             break;
                     }
+
                     description += string.Format(
                         " ({0} Core: {1})",
                         codec,
                         CoreStream.Description);
                 }
+
                 return description;
             }
         }

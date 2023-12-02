@@ -61,12 +61,12 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     bNextDoubleDotParentDirIsInnerSpecial = true;
                 }
+
                 bNextSingleDotCurrentDirIsInnerSpecial = true;
             }
 
             return false;
         }
-
 
         internal static bool TryResolveInnerSpecialDir(string path, out string pathResolved, out string failureReason)
         {
@@ -82,7 +82,6 @@ namespace NDepend.Helpers.FileDirectoryPath
             Debug.Assert(ContainsInnerSpecialDir(path));
 
             bool bPathIsAbolute = !CanOnlyBeARelativePath(path);
-
 
             string[] pathDirs = path.Split(DIR_SEPARATOR_CHAR);
             Debug.Assert(pathDirs.Length > 0);
@@ -117,6 +116,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                             failureReason = @"The path {" + path + @"} references the parent dir \..\ of the root dir {" + pathDirs[0] + "}, it cannot be resolved";
                             return false;
                         }
+
                         string dirToRemove = dirStack.Peek();
                         if (dirToRemove == CURRENT_DIR_SINGLEDOT)
                         {
@@ -124,11 +124,13 @@ namespace NDepend.Helpers.FileDirectoryPath
                             failureReason = @"The path {" + path + @"} references the parent dir \..\ of the current root dir .\, it cannot be resolved";
                             return false;
                         }
+
                         if (dirToRemove == PARENT_DIR_DOUBLEDOT)
                         {
                             failureReason = @"The path {" + path + @"} references the parent dir \..\ of a parent dir \..\, it cannot be resolved";
                             return false;
                         }
+
                         dirStack.Pop();
                     }
                     else
@@ -141,6 +143,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     dirStack.Push(dir);
                     bNextDoubleDotParentDirIsInnerSpecial = true;
                 }
+
                 bNextSingleDotCurrentDirIsInnerSpecial = true;
             }
 
@@ -160,14 +163,12 @@ namespace NDepend.Helpers.FileDirectoryPath
             return true;
         }
 
-
         internal static bool CanOnlyBeARelativePath(string path)
         {
             Debug.Assert(path != null);
             Debug.Assert(path.Length >= 1);
             return path[0] == '.';
         }
-
 
         //
         //  Path normalization
@@ -184,7 +185,6 @@ namespace NDepend.Helpers.FileDirectoryPath
                 path = path.Replace(consecutiveDirSeparator, DIR_SEPARATOR_STRING);
             }
 
-
             // EventuallyRemoveEndingDirSeparator
             while (true)
             {
@@ -194,6 +194,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     break;
                 }
+
                 path = path.Substring(0, path.Length - 1);
             }
 
@@ -211,6 +212,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 throw new InvalidOperationException(@"Can't get the parent dir from path """ + path + @"""");
             }
+
             int index = path.LastIndexOf(DIR_SEPARATOR_CHAR);
             return path.Substring(0, index);
         }
@@ -221,6 +223,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return string.Empty;
             }
+
             int index = path.LastIndexOf(DIR_SEPARATOR_CHAR);
             Debug.Assert(index != path.Length - 1);
             return path.Substring(index + 1, path.Length - index - 1);
@@ -234,13 +237,14 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return string.Empty;
             }
+
             if (index == fileName.Length - 1)
             {
                 return string.Empty;
             }
+
             return fileName.Substring(index, fileName.Length - index);
         }
-
 
         //
         //  GetPathRelativeTo
@@ -266,6 +270,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     break;
                 }
+
                 lastCommonRoot = i;
             }
 
@@ -280,6 +285,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     relativeDirs.Add("..");
                 }
             }
+
             if (relativeDirs.Count == 0)
             {
                 relativeDirs.Add(CURRENT_DIR_SINGLEDOT);
@@ -296,8 +302,6 @@ namespace NDepend.Helpers.FileDirectoryPath
             string relativePath = string.Join(DIR_SEPARATOR_STRING, relativeParts);
             return relativePath;
         }
-
-
 
         //
         //  GetAbsolutePath
@@ -343,6 +347,7 @@ PathTo   = """ + pathTo + @"""");
             {
                 dirsExtractedFromPathFrom[i] = pathFromDirs[i];
             }
+
             string partExtractedFromPathFrom = string.Join(DIR_SEPARATOR_STRING, dirsExtractedFromPathFrom);
 
             // Apply nbParentDirToGoBackInPathFrom to extract part from pathTo
@@ -351,6 +356,7 @@ PathTo   = """ + pathTo + @"""");
             {
                 dirsExtractedFromPathTo[i] = pathToDirs[i + nbSpecialDirToGoUpInPathTo];
             }
+
             string partExtractedFromPathTo = string.Join(DIR_SEPARATOR_STRING, dirsExtractedFromPathTo);
 
             // Concatenate the 2 parts extracted from pathFrom and pathTo
@@ -384,6 +390,7 @@ PathTo   = """ + pathTo + @"""");
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -393,14 +400,17 @@ PathTo   = """ + pathTo + @"""");
             {
                 return false;
             }
+
             if (!char.IsLetter(path[0]))
             {
                 return false;
             }
+
             if (path[1] != ':')
             {
                 return false;
             }
+
             return true;
         }
     }

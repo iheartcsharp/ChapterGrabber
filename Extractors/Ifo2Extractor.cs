@@ -89,6 +89,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     }
                 }
             }
+
             if (programChain < 0)
             {
                 return null;
@@ -131,6 +132,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     chapters.Add(new ChapterEntry() { Name = string.Format("Chapter {0}", currentProgram + 2), Time = duration });
                 }
             }
+
             return chapters;
         }
     }

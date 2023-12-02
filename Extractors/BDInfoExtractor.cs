@@ -62,6 +62,7 @@ namespace JarrettVance.ChapterTools.Extractors
                             break;
                         }
                     }
+
                     if (pgc.FramesPerSecond != 0)
                     {
                         break;

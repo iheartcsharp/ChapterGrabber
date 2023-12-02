@@ -49,6 +49,7 @@ namespace JarrettVance.ChapterTools.Extractors
                         Trace.WriteLine(string.Format("VTS IFO file missing: {0}", Path.GetFileName(vtsIFO)));
                         continue;
                     }
+
                     var pgc = ex.GetStreams(vtsIFO)[0];
                     if (string.IsNullOrEmpty(vol))
                     {

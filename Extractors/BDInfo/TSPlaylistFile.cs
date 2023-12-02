@@ -81,6 +81,7 @@ namespace BDInfo
                 {
                     size += clip.FileSize;
                 }
+
                 return size;
             }
         }
@@ -96,6 +97,7 @@ namespace BDInfo
                         length += clip.Length;
                     }
                 }
+
                 return length;
             }
         }
@@ -109,6 +111,7 @@ namespace BDInfo
                 {
                     length += clip.Length;
                 }
+
                 return length;
             }
         }
@@ -125,6 +128,7 @@ namespace BDInfo
                         size += clip.PacketSize;
                     }
                 }
+
                 return size;
             }
         }
@@ -138,6 +142,7 @@ namespace BDInfo
                 {
                     size += clip.PacketSize;
                 }
+
                 return size;
             }
         }
@@ -150,6 +155,7 @@ namespace BDInfo
                 {
                     return (ulong)Math.Round(((TotalSize * 8.0) / TotalLength));
                 }
+
                 return 0;
             }
         }
@@ -162,6 +168,7 @@ namespace BDInfo
                 {
                     return (ulong)Math.Round(((AngleSize * 8.0) / AngleLength));
                 }
+
                 return 0;
             }
         }
@@ -270,6 +277,7 @@ namespace BDInfo
                     {
                         streamClipFile = streamClipFiles[streamClipFileName];
                     }
+
                     if (streamClipFile == null)
                     {
                         continue;
@@ -319,6 +327,7 @@ namespace BDInfo
                         {
                             AngleCount = angleCount - 1;
                         }
+
                         for (int angle = 0; angle < (angleCount - 1); angle++)
                         {
                             byte[] angleFileNameData = new byte[5];
@@ -350,6 +359,7 @@ namespace BDInfo
                             {
                                 angleClipFile = streamClipFiles[angleClipFileName];
                             }
+
                             if (angleClipFile == null)
                             {
                                 continue;
@@ -374,6 +384,7 @@ namespace BDInfo
 #endif
                         }
                     }
+
                     streamFileOffset += 2 +
                         ((int)playlistData[streamFileOffset] << 8) +
                         ((int)playlistData[streamFileOffset + 1]);
@@ -437,6 +448,7 @@ namespace BDInfo
                             chapter.TotalSeconds));
 #endif
                     }
+
                     chapterOffset += 14;
                 }
 #if DEBUG
@@ -454,6 +466,7 @@ namespace BDInfo
                 {
                     fileReader.Close();
                 }
+
                 if (fileStream != null)
                 {
                     fileStream.Close();

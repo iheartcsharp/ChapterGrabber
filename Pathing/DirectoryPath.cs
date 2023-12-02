@@ -22,8 +22,6 @@ namespace NDepend.Helpers.FileDirectoryPath
         public override bool IsDirectoryPath { get { return true; } }
         public override bool IsFilePath { get { return false; } }
 
-
-
         //
         //  DirectoryName
         //

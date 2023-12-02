@@ -51,7 +51,6 @@ namespace JarrettVance.ChapterTools
         private int intIndex;
         private volatile bool dbWait, titleWait = false;
 
-
         private void frmMain_Load(object sender, System.EventArgs e)
         {
             FontHelper.RegisterFont(Resources.fontawesome_webfont);
@@ -105,6 +104,7 @@ namespace JarrettVance.ChapterTools
             {
                 menu.Add(mi);
             }
+
             tsslFps.DropDownItems.AddRange(
               menu.Select(mi => new ToolStripMenuItem(mi.Text, null, (s, args) => CurrentFps((double)((ToolStripMenuItem)s).Tag)) { Tag = mi.Tag }).ToArray());
 
@@ -113,6 +113,7 @@ namespace JarrettVance.ChapterTools
             {
                 menu.Add(mi);
             }
+
             tsslLang.DropDownItems.AddRange(
               menu.Where(mi => mi.Text != "-").Select(mi => new ToolStripMenuItem(mi.Text, null,
                 (s, args) => ChangeLang(((ToolStripMenuItem)s).Tag as string))
@@ -174,6 +175,7 @@ namespace JarrettVance.ChapterTools
                   (s, args) => ChangeFps((double)((MenuItem)s).Tag))
                 { Tag = fps, Checked = false });
             }
+
             menuCurrentFps.MenuItems.Clear();
             foreach (string val in Settings.Default.FpsValues)
             {
@@ -200,6 +202,7 @@ namespace JarrettVance.ChapterTools
                     Checked = lang.Key == (pgc == null ? Settings.Default.DefaultLangCode : pgc.LangCode)
                 });
             }
+
             menuLang.MenuItems.Add(menuLang.MenuItems.Count - 1, new MenuItem("-"));
         }
 
@@ -209,7 +212,6 @@ namespace JarrettVance.ChapterTools
             tsslLang.Text = langCode + " (" + LanguageCodes.GetName(langCode) + ")";
             LoadLangMenu(); //refresh list & selection
         }
-
 
         void ChangeFps(double fps)
         {
@@ -298,6 +300,7 @@ namespace JarrettVance.ChapterTools
                             }
                         }
                     }
+
                     dbWait = false;
                     Invoke(new Action(() => picDb.Visible = titleWait || dbWait));
                 });
@@ -407,6 +410,7 @@ namespace JarrettVance.ChapterTools
             {
                 openFileDialog.InitialDirectory = initDir;
             }
+
             openFileDialog.RestoreDirectory = true;
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -513,6 +517,7 @@ namespace JarrettVance.ChapterTools
                             }
                         }
                     }
+
                     dbWait = false;
                     Invoke(new Action(() => picDb.Visible = titleWait || dbWait));
                 });
@@ -544,6 +549,7 @@ namespace JarrettVance.ChapterTools
 
                     listChapters.Items.Add(new ListViewItem(new string[] { c.Time.ToShortString(), c.Name }));
                 }
+
                 if (intIndex < listChapters.Items.Count && listChapters.Items[intIndex] != null)
                 {
                     //select it
@@ -568,7 +574,6 @@ namespace JarrettVance.ChapterTools
             catch (Exception ex) { Trace.WriteLine(ex); }
             finally { this.Cursor = Cursors.Default; }
         }
-
 
         private void menuEditTimesImport_Click(object sender, System.EventArgs e)
         {
@@ -837,6 +842,7 @@ namespace JarrettVance.ChapterTools
             {
                 pgc.Chapters[i] = new ChapterEntry() { Name = "Chapter " + (i + 1), Time = pgc.Chapters[i].Time };
             }
+
             FreshChapterView();
             tsslStatus.Text = "Chapter names reset successfully.";
         }
@@ -852,6 +858,7 @@ namespace JarrettVance.ChapterTools
                 {
                     d.SelectedPath = initDir;
                 }
+
                 if (d.ShowDialog() == DialogResult.OK)
                 {
                     OpenDisc(d.SelectedPath);
@@ -961,6 +968,7 @@ namespace JarrettVance.ChapterTools
                         }
                     });
             }
+
             int num = -1;
             if (titles.Count > 0 && titles[0].Value == pgc.Title)
             {
@@ -1126,6 +1134,7 @@ namespace JarrettVance.ChapterTools
                             Time = this.pgc.Chapters[i].Time.Add(TimeSpan.FromSeconds(dlg.DelaySeconds)),
                         };
                     }
+
                     this.FreshChapterView();
                 }
             }

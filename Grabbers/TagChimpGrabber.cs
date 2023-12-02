@@ -45,7 +45,6 @@ namespace JarrettVance.ChapterTools.Grabbers
             }
         }
 
-
         static void ImportFromSearchXml(List<ChapterEntry> chapters, XDocument xml, int id)
         {
             //if (chapters.Count == 0) throw new Exception("Cannot import names to an empty chapter list.");

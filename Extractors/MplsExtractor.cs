@@ -90,8 +90,10 @@ namespace JarrettVance.ChapterTools.Extractors
                         Time = new TimeSpan((long)(relativeSeconds * (double)TimeSpan.TicksPerSecond))
                     });
                 }
+
                 chapterOffset += 14;
             }
+
             pgc.Chapters = chapters;
 
             //TODO: get real FPS
@@ -158,6 +160,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     ((int)playlistData[streamFileOffset] << 8) +
                     ((int)playlistData[streamFileOffset + 1]);
             }
+
             return chapterClips;
         }
 
@@ -182,7 +185,6 @@ namespace JarrettVance.ChapterTools.Extractors
     }
 
 }
-
 
 //    public static void Test()
 //    {
@@ -216,7 +218,6 @@ namespace JarrettVance.ChapterTools.Extractors
 //                string angleBitrate = string.Format(
 //                    "{0:F2}",
 //                    Math.Round((double)playlist.AngleBitRate / 10000) / 100);
-
 
 //                    double chapterPosition = 0; 
 //                    double chapterBits = 0;

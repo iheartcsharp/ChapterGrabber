@@ -12,7 +12,6 @@ using System.Diagnostics;
 namespace NDepend.Helpers.FileDirectoryPath
 {
 
-
     public enum PathMode
     {
         Absolute = 0,
@@ -23,7 +22,6 @@ namespace NDepend.Helpers.FileDirectoryPath
     [DebuggerDisplay(@"{this.GetType().Name}  {m_Path}")]
     public abstract class BasePath
     {
-
 
         //
         //  Ctor
@@ -52,6 +50,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 PathHelper.IsValidRelativePath(path, out errorReason);
             }
+
             if (errorReason.Length > 0)
             {
                 throw new ArgumentException(path, errorReason);
@@ -62,20 +61,18 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 InternalStringHelper.TryResolveInnerSpecialDir(path, out path, out errorReason);
             }
+
             Debug.Assert(errorReason.Length == 0); // The error test has already been done in IsValidXXXPath()
             Debug.Assert(path != null && path.Length > 0);
 
             m_Path = path;
         }
 
-
         //
         //  Private and immutable states
         //
         private string m_Path;
         public string Path { get { return m_Path; } }
-
-
 
         public abstract bool IsAbsolutePath { get; }
         public abstract bool IsRelativePath { get; }
@@ -110,7 +107,6 @@ namespace NDepend.Helpers.FileDirectoryPath
             get { return m_Path.Length == 0; }
         }
 
-
         //
         // ParentDirectoryPath
         //
@@ -123,10 +119,10 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     return new DirectoryPathRelative(parentPath);
                 }
+
                 return new DirectoryPathAbsolute(parentPath);
             }
         }
-
 
         //
         //  Drive
@@ -150,9 +146,6 @@ namespace NDepend.Helpers.FileDirectoryPath
             }
         }
 
-
-
-
         //
         // Comparison
         //
@@ -174,6 +167,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return false;
             }
+
             return string.Compare(this.m_Path, path.m_Path, true) == 0;
         }
 
@@ -185,6 +179,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 // Comparaison du contenu.
                 return this.Equals(basePath);
             }
+
             return false;
         }
         public static bool operator ==(BasePath path1, object path2)
@@ -193,13 +188,13 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return BasePath.ReferenceEquals(path2, null);
             }
+
             return path1.Equals(path2);
         }
         public static bool operator !=(BasePath path1, object path2)
         {
             return !(path1 == path2);
         }
-
 
         //
         //  GetHashCode() when path is key in Dictionnary
@@ -210,7 +205,6 @@ namespace NDepend.Helpers.FileDirectoryPath
                (this.IsAbsolutePath ? 1231 : 5677) +
                (this.IsFilePath ? 1457 : 3461);
         }
-
 
         //
         //  Relative/absolute
@@ -231,6 +225,7 @@ PathTo   = """ + pathTo.Path + @"""");
             }
             // Only work with Directory 
             if (pathTo.IsFilePath) { pathTo = pathTo.ParentDirectoryPath; }
+
             return InternalStringHelper.GetPathRelativeTo(pathFrom.Path, pathTo.Path);
         }
 
@@ -244,6 +239,7 @@ PathTo   = """ + pathTo.Path + @"""");
             }*/
             // Only work with Directory 
             if (pathTo.IsFilePath) { pathTo = pathTo.ParentDirectoryPath; }
+
             return InternalStringHelper.GetAbsolutePath(pathFrom.Path, pathTo.Path);
         }
 

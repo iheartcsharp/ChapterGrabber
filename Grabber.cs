@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
 
-
 namespace JarrettVance.ChapterTools
 {
     /// <summary>
@@ -133,7 +132,6 @@ namespace JarrettVance.ChapterTools
             }
         }
 
-
         //public static List<Chapter> LoadTextChapters(string filename)
         //{
         //  List<Chapter> list = new List<Chapter>();
@@ -229,8 +227,6 @@ namespace JarrettVance.ChapterTools
         //          //chapters[i].Name = ExtractFromHtml(html, i+1, includeDuration);
         //      return true;
         //  }
-
-
 
         private static string ExtractFromHtml(string html, int chapterNum, bool includeDuration)
         {

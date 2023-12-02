@@ -55,6 +55,7 @@ namespace JarrettVance.ChapterTools
             {
                 sFamilies.Add(family, new FontFamily(family));
             }
+
             return sFamilies[family];
         }
 

@@ -23,6 +23,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return list2 == null;
             }
+
             if (list1.Count != list2.Count)
             {
                 return false;
@@ -37,6 +38,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     return false;
                 }
             }
+
             return true;
         }
         private static List<BasePath> DuplicateAndSort<T>(List<T> listIn) where T : BasePath
@@ -49,25 +51,27 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     return string.Compare(path1.Path, path2.Path, true);
                 }
+
                 if (path1.IsAbsolutePath && path2.IsRelativePath)
                 {
                     return 1;
                 }
+
                 if (path2.IsAbsolutePath && path1.IsRelativePath)
                 {
                     return -1;
                 }
+
                 if (path1.IsFilePath && path2.IsDirectoryPath)
                 {
                     return 1;
                 }
+
                 Debug.Assert(path2.IsFilePath && path1.IsDirectoryPath);
                 return -1;
             });
             return listOut;
         }
-
-
 
         public static bool TryGetCommonRootDirectory(List<DirectoryPathAbsolute> listOfPaths, out DirectoryPathAbsolute commonRootDirectory)
         {
@@ -76,6 +80,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return false;
             }
+
             if (listOfPaths.Count == 0)
             {
                 return false;
@@ -96,7 +101,6 @@ namespace NDepend.Helpers.FileDirectoryPath
                 return true;
             }
 
-
             //
             //  Case where all paths are identical
             //
@@ -109,6 +113,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     break;
                 }
             }
+
             if (allPathsAreIdentical)
             {
                 commonRootDirectory = listOfPaths[0];
@@ -138,9 +143,9 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     maxDeepForRootDir = pathSplitted.Length;
                 }
+
                 listOfSplittedPaths.Add(pathSplitted);
             }
-
 
             //
             // Compute commonRootDirPath from listOfSplittedPaths
@@ -157,6 +162,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                         return true;
                     }
                 }
+
                 if (i == 0)
                 {
                     commonRootDirPath += current;
@@ -166,12 +172,10 @@ namespace NDepend.Helpers.FileDirectoryPath
                     commonRootDirPath += Path.DirectorySeparatorChar + current;
                 }
             }
+
             commonRootDirectory = new DirectoryPathAbsolute(commonRootDirPath);
             return true;
         }
-
-
-
 
         public static bool Contains<T>(List<T> list, T path) where T : BasePath
         {
@@ -179,13 +183,14 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return false;
             }
+
             if (path == null)
             {
                 return list.FindAll(delegate (T t) { return t == null; }).Count > 0;
             }
+
             return list.Find(delegate (T t) { return path.Equals(t); }) != null;
         }
-
 
         public static void GetListOfUniqueDirsAndUniqueFileNames(
               List<FilePathAbsolute> listOfFilePath,
@@ -207,6 +212,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     continue;
                 }
+
                 DirectoryPathAbsolute dir = filePath.ParentDirectoryPath;
                 if (!ListOfPathHelper.Contains(listOfUniqueDirs, dir))
                 {
@@ -231,6 +237,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     return true;
                 }
             }
+
             return false;
         }
     }

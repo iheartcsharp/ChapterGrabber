@@ -15,7 +15,6 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
         }
 
-
         //
         //  Absolute/Relative path conversion
         //
@@ -25,10 +24,12 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 throw new ArgumentNullException();
             }
+
             if (PathHelper.IsEmpty(this) || PathHelper.IsEmpty(path))
             {
                 throw new ArgumentException("Cannot compute an absolute path from an empty path.");
             }
+
             string pathAbsolute = BasePath.GetAbsolutePathFrom(path, this);
             return new FilePathAbsolute(pathAbsolute + System.IO.Path.DirectorySeparatorChar + this.FileName);
         }
@@ -41,10 +42,9 @@ namespace NDepend.Helpers.FileDirectoryPath
                 return true;
             }
             catch { }
+
             return false;
         }
-
-
 
         //
         //  Path Browsing facilities
@@ -58,34 +58,40 @@ namespace NDepend.Helpers.FileDirectoryPath
             }
         }
 
-
         public FilePathRelative GetBrotherFileWithName(string fileName)
         {
             if (fileName == null) { throw new ArgumentNullException("filename"); }
+
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
+
             if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+
             return this.ParentDirectoryPath.GetChildFileWithName(fileName);
         }
 
         public DirectoryPathRelative GetBrotherDirectoryWithName(string fileName)
         {
             if (fileName == null) { throw new ArgumentNullException("filename"); }
+
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
+
             if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+
             return this.ParentDirectoryPath.GetChildDirectoryWithName(fileName);
         }
-
 
         public FilePathRelative ChangeExtension(string newExtension)
         {
             if (newExtension == null) { throw new ArgumentNullException(newExtension); }
+
             if (newExtension.Length > 0 && newExtension[0] != '.') { throw new ArgumentException("A file extension must begin with a dot", newExtension); }
+
             if (this.IsEmpty) { throw new InvalidOperationException("Cannot change the extension on an empty file"); }
+
             return new FilePathRelative(
                this.ParentDirectoryPath.GetChildFileWithName(
                   this.FileNameWithoutExtension + newExtension).Path);
         }
-
 
         //
         //  Empty FilePathRelative

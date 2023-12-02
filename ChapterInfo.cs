@@ -119,6 +119,7 @@ namespace JarrettVance.ChapterTools
                     }
                 }
             }
+
             return matches / count;
         }
 
@@ -151,6 +152,7 @@ namespace JarrettVance.ChapterTools
                 lines.Add("CHAPTER" + i.ToString("00") + "=" + c.Time.ToShortString());
                 lines.Add("CHAPTER" + i.ToString("00") + "NAME=" + c.Name);
             }
+
             File.WriteAllLines(filename, lines.ToArray());
         }
 
@@ -161,6 +163,7 @@ namespace JarrettVance.ChapterTools
             {
                 lines.Add(string.Format("{0} I -1", (long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)));
             }
+
             File.WriteAllLines(filename, lines.ToArray());
         }
 
@@ -171,6 +174,7 @@ namespace JarrettVance.ChapterTools
             {
                 lines.Add(((long)Math.Round(c.Time.TotalSeconds * FramesPerSecond)).ToString());
             }
+
             File.WriteAllLines(filename, lines.ToArray());
         }
 
@@ -181,6 +185,7 @@ namespace JarrettVance.ChapterTools
             {
                 text += c.Time.ToShortString() + ";";
             }
+
             text = text.Substring(0, text.Length - 1);
             File.WriteAllText(filename, text);
         }
@@ -192,6 +197,7 @@ namespace JarrettVance.ChapterTools
             {
                 lines.Add(c.Time.ToShortString());
             }
+
             File.WriteAllLines(filename, lines.ToArray());
         }
 
@@ -208,7 +214,6 @@ namespace JarrettVance.ChapterTools
             XDocument doc = XDocument.Load(filename);
             return ChapterInfo.Load(doc.Root);
         }
-
 
         public static ChapterInfo Load(XElement root)
         {

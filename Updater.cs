@@ -42,12 +42,14 @@ namespace JarrettVance.ChapterTools
                     showUpdateDialog(appVersion, newestVersion, doc);
                     return UpdateStatus.NewVersionAvailable;
                 }
+
                 return UpdateStatus.NoUpdate;
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex);
             }
+
             return UpdateStatus.UpdateFailed;
         }
 

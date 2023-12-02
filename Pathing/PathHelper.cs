@@ -15,7 +15,6 @@ namespace NDepend.Helpers.FileDirectoryPath
     public static class PathHelper
     {
 
-
         #region Path String Validity
         //----------------------------------------
         //
@@ -31,6 +30,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 reason = "Input path string is null";
                 return false;
             }
+
             if (path.Length == 0)
             {
                 reason = "Empty string for path";
@@ -64,6 +64,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -75,6 +76,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 reason = "Input path string is null";
                 return false;
             }
+
             if (path.Length == 0)
             {
                 reason = "Empty string for path";
@@ -96,6 +98,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -110,6 +113,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 throw new ArgumentNullException();
             }
+
             return basePath.Path.Length == 0;
         }
 
@@ -119,15 +123,11 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 throw new ArgumentNullException();
             }
+
             return (basePath.IsAbsolutePath && pathMode == PathMode.Absolute) ||
                    (basePath.IsRelativePath && pathMode == PathMode.Relative);
         }
         #endregion Path String Validity
-
-
-
-
-
 
         #region Infer Relative/Absolute path from string
         //---------------------------------------------------
@@ -142,6 +142,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return new DirectoryPathRelative(path);
             }
+
             return new DirectoryPathAbsolute(path);
         }
         public static FilePath BuildFilePath(string path)
@@ -151,13 +152,10 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return new FilePathRelative(path);
             }
+
             return new FilePathAbsolute(path);
         }
         #endregion Infer Relative/Absolute path from string
-
-
-
-
 
         // TODOJAVA Remove also .jar extensions
         public static string TryRemoveDllOrExeExtension(string filePath)
@@ -166,30 +164,22 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return string.Empty;
             }
+
             filePath = filePath.Trim();
             if (filePath.Length <= 4)
             {
                 return filePath;
             }
+
             string lastFourChars = filePath.Substring(filePath.Length - 4, 4);
             if (string.Compare(lastFourChars, ".dll", true) == 0 ||
                 string.Compare(lastFourChars, ".exe", true) == 0)
             {
                 return filePath.Substring(0, filePath.Length - 4);
             }
+
             return filePath;
         }
-
-
-
-
-
-
-
-
-
-
-
 
         #region Try Rebase path
         //----------------------------------------------
@@ -222,10 +212,12 @@ namespace NDepend.Helpers.FileDirectoryPath
             {
                 return false;
             }
+
             if (PathHelper.IsNullOrEmpty(validPath))
             {
                 return false;
             }
+
             List<string> originalPathDirs = new List<string>(originalPath.Path.Split(Path.DirectorySeparatorChar));
             List<string> validPathDirs = new List<string>(validPath.Path.Split(Path.DirectorySeparatorChar));
 
@@ -246,6 +238,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                     }
                 }
             }
+
             if (indexInValidPathOfDeeperCommonDirName == -1)
             {
                 // No common dir name, return null

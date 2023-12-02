@@ -119,7 +119,6 @@ namespace JarrettVance.ChapterTools
             this.lblArrow.Visible = selected;
         }
 
-
         private void SearchResultItem_Click(object sender, EventArgs e)
         {
             this.Select();

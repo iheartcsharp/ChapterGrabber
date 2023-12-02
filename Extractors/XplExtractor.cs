@@ -57,12 +57,14 @@ namespace JarrettVance.ChapterTools.Extractors
                             Time = GetTimeSpan((string)chapter.Attribute("titleTimeBegin"), timeBase, tickBase, tickBaseDivisor)
                         });
                     }
+
                     pgc.Chapters = chapters;
                     OnChaptersLoaded(pgc);
                     //pgc.ChangeFps(24D / 1.001D);
                     pgcs.Add(pgc);
                 }
             }
+
             pgcs = pgcs.OrderByDescending(p => p.Duration).ToList();
             OnExtractionComplete();
             return pgcs;

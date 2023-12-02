@@ -121,6 +121,7 @@ namespace BDInfo
                                 aspectRatio));
 #endif
                             }
+
                             break;
 
                         case TSStreamType.AC3_AUDIO:
@@ -161,6 +162,7 @@ namespace BDInfo
                                 sampleRate));
 #endif
                             }
+
                             break;
 
                         case TSStreamType.INTERACTIVE_GRAPHICS:
@@ -182,6 +184,7 @@ namespace BDInfo
                                 languageCode));
 #endif
                             }
+
                             break;
 
                         case TSStreamType.SUBTITLE:
@@ -201,6 +204,7 @@ namespace BDInfo
                                 stream = new TSTextStream();
                                 stream.LanguageCode = languageCode;
                             }
+
                             break;
                     }
 
@@ -213,6 +217,7 @@ namespace BDInfo
 
                     streamOffset += clipData[streamOffset] + 1;
                 }
+
                 IsValid = true;
             }
             finally

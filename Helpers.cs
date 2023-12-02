@@ -6,7 +6,6 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-
 namespace JarrettVance.ChapterTools
 {
     public static class Helpers
@@ -36,7 +35,6 @@ namespace JarrettVance.ChapterTools
             return new string(chars.ToArray());
         }
 
-
         public static void FillRoundedRectangle(Graphics graphics, Rectangle rectangle, Brush brush, int radius)
         {
             if (graphics == null)
@@ -51,6 +49,7 @@ namespace JarrettVance.ChapterTools
             {
                 graphics.FillPath(brush, path);
             }
+
             graphics.SmoothingMode = mode;
         }
 
@@ -71,8 +70,6 @@ namespace JarrettVance.ChapterTools
             return path;
         }
     }
-
-
 
     public abstract class RoundedRectangle
     {

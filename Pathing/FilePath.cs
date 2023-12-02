@@ -41,6 +41,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 {
                     return fileName;
                 }
+
                 Debug.Assert(fileName.Length - extension.Length >= 0);
                 return fileName.Substring(0, fileName.Length - extension.Length);
             }
@@ -57,9 +58,6 @@ The extension must be a non-null string that begins with a dot", "extension");
             // Ignore case comparison
             return (string.Compare(this.FileExtension, extension, true) == 0);
         }
-
-
-
 
     }
 }

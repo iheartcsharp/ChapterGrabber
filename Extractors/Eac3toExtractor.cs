@@ -79,6 +79,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     {
                         throw new Exception("Error creating chapters file.");
                     }
+
                     TextExtractor extractor = new TextExtractor();
                     pgc.Chapters = extractor.GetStreams("chapters.txt")[0].Chapters;
                     OnChaptersLoaded(pgc);

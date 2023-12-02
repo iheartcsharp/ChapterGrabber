@@ -46,6 +46,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     //add it to list
                     list.Add(new ChapterEntry() { Name = name, Time = ts });
                 }
+
                 onTime = !onTime;
             }
 

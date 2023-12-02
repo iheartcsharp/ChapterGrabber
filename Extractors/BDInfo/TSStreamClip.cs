@@ -50,6 +50,7 @@ namespace BDInfo
                 {
                     return (ulong)Math.Round(((PacketSize * 8.0) / PacketSeconds));
                 }
+
                 return 0;
             }
         }
