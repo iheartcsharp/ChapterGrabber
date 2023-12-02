@@ -36,7 +36,7 @@ namespace JarrettVance.ChapterTools.Extractors
             ChapterInfo pgc = new ChapterInfo();
             pgc.SourceType = "DVD";
             pgc.SourceName = location;
-            pgc.SourceHash = ChapterExtractor.ComputeMD5Sum(location);
+            pgc.SourceHash = ComputeMD5Sum(location);
             pgc.Extractor = Application.ProductName + " " + Application.ProductVersion;
             pgc.Title = Path.GetFileNameWithoutExtension(location);
             OnStreamDetected(pgc);

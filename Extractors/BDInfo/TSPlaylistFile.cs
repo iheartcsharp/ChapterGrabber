@@ -201,7 +201,7 @@ namespace BDInfo
                 byte[] fileType = new byte[8];
                 Array.Copy(data, 0, fileType, 0, fileType.Length);
 
-                FileType = ASCIIEncoding.ASCII.GetString(fileType);
+                FileType = Encoding.ASCII.GetString(fileType);
                 if ((FileType != "MPLS0100" && FileType != "MPLS0200")
                     /*|| data[45] != 1*/)
                 {
@@ -265,7 +265,7 @@ namespace BDInfo
                     TSStreamClipFile streamClipFile = null;
                     string streamClipFileName = string.Format(
                         "{0}.CLPI",
-                        ASCIIEncoding.ASCII.GetString(streamFileNameData));
+                        Encoding.ASCII.GetString(streamFileNameData));
                     string streamClipFilePath = Path.Combine(Path.Combine(FileInfo.Directory.Parent.FullName, "CLIPINF"),
                       streamClipFileName);
                     if (File.Exists(streamClipFilePath) && !streamClipFiles.ContainsKey(streamClipFileName))
@@ -354,7 +354,7 @@ namespace BDInfo
                             TSStreamClipFile angleClipFile = null;
                             string angleClipFileName = string.Format(
                                 "{0}.CLPI",
-                                ASCIIEncoding.ASCII.GetString(angleFileNameData));
+                                Encoding.ASCII.GetString(angleFileNameData));
                             if (streamClipFiles.ContainsKey(angleClipFileName))
                             {
                                 angleClipFile = streamClipFiles[angleClipFileName];

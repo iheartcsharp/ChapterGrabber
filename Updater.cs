@@ -65,7 +65,7 @@ namespace JarrettVance.ChapterTools
 
             // launch updater
             string updater = GetUpdaterPath();
-            System.Diagnostics.Process.Start(updater, "\"" + file + "\" \"" + Application.ExecutablePath + "\"");
+            Process.Start(updater, "\"" + file + "\" \"" + Application.ExecutablePath + "\"");
         }
 
         /// <summary>

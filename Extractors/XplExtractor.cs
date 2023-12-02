@@ -29,7 +29,7 @@ namespace JarrettVance.ChapterTools.Extractors
                     ChapterInfo pgc = new ChapterInfo();
                     List<ChapterEntry> chapters = new List<ChapterEntry>();
                     pgc.SourceName = location;
-                    pgc.SourceHash = ChapterExtractor.ComputeMD5Sum(location);
+                    pgc.SourceHash = ComputeMD5Sum(location);
                     pgc.SourceType = "HD-DVD";
                     pgc.FramesPerSecond = 24D;
                     pgc.Extractor = Application.ProductName + " " + Application.ProductVersion;

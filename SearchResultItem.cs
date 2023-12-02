@@ -111,10 +111,10 @@ namespace JarrettVance.ChapterTools
 
         private void AlterView()
         {
-            lblName.ForeColor = selected ? System.Drawing.SystemColors.MenuHighlight : System.Drawing.SystemColors.WindowText;
-            lblSourceType.ForeColor = selected ? System.Drawing.SystemColors.MenuHighlight : System.Drawing.SystemColors.GrayText;
-            lblDuration.ForeColor = selected ? System.Drawing.SystemColors.MenuHighlight : System.Drawing.SystemColors.GrayText;
-            lblCount.ForeColor = selected ? System.Drawing.SystemColors.MenuHighlight : System.Drawing.SystemColors.GrayText;
+            lblName.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.WindowText;
+            lblSourceType.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.GrayText;
+            lblDuration.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.GrayText;
+            lblCount.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.GrayText;
             //this.BackColor = selected ? System.Drawing.SystemColors.MenuBar : System.Drawing.SystemColors.Window;
             this.lblArrow.Visible = selected;
         }

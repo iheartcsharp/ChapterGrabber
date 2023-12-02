@@ -214,7 +214,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 }
 
                 DirectoryPathAbsolute dir = filePath.ParentDirectoryPath;
-                if (!ListOfPathHelper.Contains(listOfUniqueDirs, dir))
+                if (!Contains(listOfUniqueDirs, dir))
                 {
                     listOfUniqueDirs.Add(dir);
                 }

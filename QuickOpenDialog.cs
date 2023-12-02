@@ -59,7 +59,7 @@ namespace JarrettVance.ChapterTools
                     di.Opened += (s, e) =>
                         {
                             this.DiscPath = ((Disc)((DiscItem)s).Tag).Path;
-                            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                            this.DialogResult = DialogResult.OK;
                             this.Close();
                         };
                     this.flowDiscs.Controls.Add(di);

@@ -42,7 +42,7 @@ namespace JarrettVance.ChapterTools.Extractors
                 {
                     Duration = TimeSpan.Parse(data[data.Length - 1].Trim()),
                     SourceName = data[0].Split(')')[0],
-                    SourceHash = ChapterExtractor.ComputeMD5Sum(sourceFile)
+                    SourceHash = ComputeMD5Sum(sourceFile)
                 };
                 OnStreamDetected(pgc);
                 pgcs.Add(pgc);

@@ -51,7 +51,7 @@ namespace JarrettVance.ChapterTools
             if (IsValid())
             {
                 Settings.Default.DatabaseApiKey = txtApiKey.Text.Trim();
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }

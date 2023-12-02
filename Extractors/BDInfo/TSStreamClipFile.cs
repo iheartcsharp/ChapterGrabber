@@ -46,7 +46,7 @@ namespace BDInfo
                 byte[] fileType = new byte[8];
                 Array.Copy(data, 0, fileType, 0, fileType.Length);
 
-                FileType = ASCIIEncoding.ASCII.GetString(fileType);
+                FileType = Encoding.ASCII.GetString(fileType);
                 if (FileType != "HDMV0100" &&
                     FileType != "HDMV0200")
                 {
@@ -140,7 +140,7 @@ namespace BDInfo
                                 Array.Copy(clipData, streamOffset + 3,
                                     languageBytes, 0, languageBytes.Length);
                                 string languageCode =
-                                    ASCIIEncoding.ASCII.GetString(languageBytes);
+                                    Encoding.ASCII.GetString(languageBytes);
 
                                 TSChannelLayout channelLayout = (TSChannelLayout)
                                     (clipData[streamOffset + 2] >> 4);
@@ -172,7 +172,7 @@ namespace BDInfo
                                 Array.Copy(clipData, streamOffset + 2,
                                     languageBytes, 0, languageBytes.Length);
                                 string languageCode =
-                                    ASCIIEncoding.ASCII.GetString(languageBytes);
+                                    Encoding.ASCII.GetString(languageBytes);
 
                                 stream = new TSGraphicsStream();
                                 stream.LanguageCode = languageCode;
@@ -193,7 +193,7 @@ namespace BDInfo
                                 Array.Copy(clipData, streamOffset + 3,
                                     languageBytes, 0, languageBytes.Length);
                                 string languageCode =
-                                    ASCIIEncoding.ASCII.GetString(languageBytes);
+                                    Encoding.ASCII.GetString(languageBytes);
 #if DEBUG
                             Debug.WriteLine(string.Format(
                                 "\t{0} {1} {2}",

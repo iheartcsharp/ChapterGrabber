@@ -23,7 +23,7 @@ namespace JarrettVance.ChapterTools
 
             Updater.UpdateUpdater();
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Application.EnableVisualStyles();
             var f = new MainForm();
             if (args.Length > 0)

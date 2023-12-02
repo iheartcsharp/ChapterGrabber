@@ -174,7 +174,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         public override bool Equals(object obj)
         {
             BasePath basePath = obj as BasePath;
-            if (!BasePath.ReferenceEquals(basePath, null))
+            if (!ReferenceEquals(basePath, null))
             {
                 // Comparaison du contenu.
                 return this.Equals(basePath);
@@ -184,9 +184,9 @@ namespace NDepend.Helpers.FileDirectoryPath
         }
         public static bool operator ==(BasePath path1, object path2)
         {
-            if (BasePath.ReferenceEquals(path1, null))
+            if (ReferenceEquals(path1, null))
             {
-                return BasePath.ReferenceEquals(path2, null);
+                return ReferenceEquals(path2, null);
             }
 
             return path1.Equals(path2);

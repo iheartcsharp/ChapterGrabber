@@ -206,13 +206,13 @@ namespace JarrettVance.ChapterTools
         public static ChapterInfo Load(XmlReader r)
         {
             XDocument doc = XDocument.Load(r);
-            return ChapterInfo.Load(doc.Root);
+            return Load(doc.Root);
         }
 
         public static ChapterInfo Load(string filename)
         {
             XDocument doc = XDocument.Load(filename);
-            return ChapterInfo.Load(doc.Root);
+            return Load(doc.Root);
         }
 
         public static ChapterInfo Load(XElement root)

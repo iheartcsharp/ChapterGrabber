@@ -154,7 +154,7 @@ namespace JarrettVance.ChapterTools
                 f.Text = string.Format(f.Text, appVersion);
                 f.MoreInfoLink = (string)doc.Root.Element("info");
                 f.Info = string.Format(f.Info, newVersion, (DateTime)doc.Root.Element("date"));
-                if (f.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                if (f.ShowDialog(this) == DialogResult.OK)
                 {
                     Updater.LaunchUpdater(doc);
                     this.Close();
@@ -956,7 +956,7 @@ namespace JarrettVance.ChapterTools
 
             foreach (var t in titles)
             {
-                menuTitles.Items.Add(t.Value.Replace("&", "&&"), t.Key > 0 ? Properties.Resources.star : null, (o, s) =>
+                menuTitles.Items.Add(t.Value.Replace("&", "&&"), t.Key > 0 ? Resources.star : null, (o, s) =>
                     {
                         pgc.Title = ((ToolStripItem)o).Text.Replace("&&", "&");
                         txtTitle.TextChanged -= new EventHandler(txtTitle_TextChanged);
@@ -964,7 +964,7 @@ namespace JarrettVance.ChapterTools
                         txtTitle.TextChanged += new EventHandler(txtTitle_TextChanged);
                         if (((ToolStripItem)o).Image != null)
                         {
-                            btnTitles.Image = Properties.Resources.apply_good;
+                            btnTitles.Image = Resources.apply_good;
                         }
                     });
             }
@@ -1001,21 +1001,21 @@ namespace JarrettVance.ChapterTools
 
         private void SetGoodTitle()
         {
-            btnTitles.Image = Properties.Resources.apply_good;
+            btnTitles.Image = Resources.apply_good;
             toolTipTitle.ToolTipTitle = "Good Title";
             toolTipTitle.SetToolTip(btnTitles, "You've entered a good title.");
         }
 
         private void SetOkTitle()
         {
-            btnTitles.Image = Properties.Resources.apply_ok;
+            btnTitles.Image = Resources.apply_ok;
             toolTipTitle.ToolTipTitle = "OK Title";
             toolTipTitle.SetToolTip(btnTitles, "Click to choose a better title.");
         }
 
         private void SetBadTitle()
         {
-            btnTitles.Image = Properties.Resources.apply_bad;
+            btnTitles.Image = Resources.apply_bad;
             toolTipTitle.ToolTipTitle = "Bad Title";
             toolTipTitle.SetToolTip(btnTitles, "Please enter a good movie title.");
         }
@@ -1092,7 +1092,7 @@ namespace JarrettVance.ChapterTools
         {
             using (var dlg = new QuickOpenDialog())
             {
-                if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     OpenDisc(dlg.DiscPath);
                 }
@@ -1112,14 +1112,14 @@ namespace JarrettVance.ChapterTools
             ((LinkLabel)sender).LinkVisited = true;
             //Call the Process.Start method to open the default browser 
             //with a URL:
-            System.Diagnostics.Process.Start("http://chapterdb.org");
+            Process.Start("http://chapterdb.org");
         }
 
         private void miDelay_Click(object sender, EventArgs e)
         {
             using (var dlg = new DelayForm())
             {
-                if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     for (int i = 0; i < this.pgc.Chapters.Count; i++)
                     {

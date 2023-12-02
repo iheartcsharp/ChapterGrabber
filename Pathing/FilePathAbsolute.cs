@@ -32,7 +32,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 throw new ArgumentException("Cannot compute a relative path from an empty path.");
             }
 
-            string pathRelative = BasePath.GetPathRelative(path, this);
+            string pathRelative = GetPathRelative(path, this);
             return new FilePathRelative(pathRelative + System.IO.Path.DirectorySeparatorChar + this.FileName);
         }
 

@@ -138,7 +138,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         public static DirectoryPath BuildDirectoryPath(string path)
         {
             string unusedReason;
-            if (PathHelper.IsValidRelativePath(path, out unusedReason))
+            if (IsValidRelativePath(path, out unusedReason))
             {
                 return new DirectoryPathRelative(path);
             }
@@ -148,7 +148,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         public static FilePath BuildFilePath(string path)
         {
             string unusedReason;
-            if (PathHelper.IsValidRelativePath(path, out unusedReason))
+            if (IsValidRelativePath(path, out unusedReason))
             {
                 return new FilePathRelative(path);
             }
@@ -208,12 +208,12 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
 
             rebasedPath = DirectoryPathAbsolute.Empty;
-            if (PathHelper.IsNullOrEmpty(originalPath))
+            if (IsNullOrEmpty(originalPath))
             {
                 return false;
             }
 
-            if (PathHelper.IsNullOrEmpty(validPath))
+            if (IsNullOrEmpty(validPath))
             {
                 return false;
             }

@@ -25,7 +25,7 @@ namespace JarrettVance.ChapterTools
         private void linkInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             linkInfo.LinkVisited = true;
-            System.Diagnostics.Process.Start(MoreInfoLink);
+            Process.Start(MoreInfoLink);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace JarrettVance.ChapterTools.Extractors
             {
                 Chapters = list,
                 SourceName = location,
-                SourceHash = ChapterExtractor.ComputeMD5Sum(location),
+                SourceHash = ComputeMD5Sum(location),
                 FramesPerSecond = Settings.Default.DefaultFps,
                 Title = Path.GetFileNameWithoutExtension(location),
                 Extractor = "ChapterText"

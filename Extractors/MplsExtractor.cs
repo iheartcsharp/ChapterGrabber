@@ -25,7 +25,7 @@ namespace JarrettVance.ChapterTools.Extractors
             ChapterInfo pgc = new ChapterInfo();
             List<ChapterEntry> chapters = new List<ChapterEntry>();
             pgc.SourceName = location;
-            pgc.SourceHash = ChapterExtractor.ComputeMD5Sum(location);
+            pgc.SourceHash = ComputeMD5Sum(location);
             pgc.SourceType = "Blu-Ray";
             pgc.Extractor = Application.ProductName + " " + Application.ProductVersion;
             pgc.Title = Path.GetFileNameWithoutExtension(location);
@@ -33,7 +33,7 @@ namespace JarrettVance.ChapterTools.Extractors
             FileInfo fileInfo = new FileInfo(location);
             byte[] data = File.ReadAllBytes(location);
 
-            string fileType = ASCIIEncoding.ASCII.GetString(data, 0, 8);
+            string fileType = Encoding.ASCII.GetString(data, 0, 8);
 
             if ((fileType != "MPLS0100" && fileType != "MPLS0200")
               /*|| data[45] != 1*/)

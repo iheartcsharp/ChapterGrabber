@@ -92,7 +92,7 @@ namespace JarrettVance.ChapterTools
                 return new List<KeyValuePair<int, string>>();
             }
 
-            return Grabber.FilterMovieTitles(Grabber.GoogleTitle(title))
+            return FilterMovieTitles(GoogleTitle(title))
                 .GroupBy(k => k.Value).Select(k => new KeyValuePair<int, string>(k.Sum(t => t.Key), k.Key))
                 .OrderByDescending(k => k.Key).ToList();
         }

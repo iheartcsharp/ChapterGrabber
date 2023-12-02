@@ -30,7 +30,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 throw new ArgumentException("Cannot compute an absolute path from an empty path.");
             }
 
-            string pathAbsolute = BasePath.GetAbsolutePathFrom(path, this);
+            string pathAbsolute = GetAbsolutePathFrom(path, this);
             return new FilePathAbsolute(pathAbsolute + System.IO.Path.DirectorySeparatorChar + this.FileName);
         }
 
