@@ -80,7 +80,7 @@ namespace JarrettVance.ChapterTools
                 var vol = extracted.First().VolumeName;
                 if (!string.IsNullOrEmpty(vol))
                 {
-                    this.Text = "Select Stream from " + vol;
+                    Text = "Select Stream from " + vol;
                 }
             }
         }

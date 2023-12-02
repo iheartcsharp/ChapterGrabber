@@ -14,7 +14,7 @@ namespace JarrettVance.ChapterTools
         public ErrorItem(string error)
         {
             InitializeComponent();
-            this.lblError.Text = error;
+            lblError.Text = error;
         }
     }
 }

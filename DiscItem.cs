@@ -21,17 +21,17 @@ namespace JarrettVance.ChapterTools
         public DiscItem(Disc disc)
         {
             InitializeComponent();
-            this.Tag = disc;
+            Tag = disc;
 
             lblName.Text = disc.Name;
 
             if (disc.FoundExtractions.Length > 0)
             {
-                this.lblStatus.Text = "Possible chapters files: " + string.Join(", ", disc.FoundExtractions);
+                lblStatus.Text = "Possible chapters files: " + string.Join(", ", disc.FoundExtractions);
             }
             else
             {
-                this.lblStatus.Text = "No possible chapter files found";
+                lblStatus.Text = "No possible chapter files found";
             }
 
             if (disc.Type == "DVD")

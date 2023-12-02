@@ -13,13 +13,13 @@ namespace JarrettVance.ChapterTools
         public AboutDialog()
         {
             InitializeComponent();
-            this.Text = string.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.linkWeb.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
-            this.textBoxDescription.Text += Environment.NewLine + Environment.NewLine +
+            Text = string.Format("About {0}", AssemblyTitle);
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            linkWeb.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
+            textBoxDescription.Text += Environment.NewLine + Environment.NewLine +
               "ChapterGrabber by Jarrett Vance" + Environment.NewLine +
               "IFO parsing inspired by OpenMediaLibrary" + Environment.NewLine +
               "M2TS parsing inspired by BDInfo" + Environment.NewLine +

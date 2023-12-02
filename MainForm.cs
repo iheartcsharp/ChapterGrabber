@@ -54,9 +54,9 @@ namespace JarrettVance.ChapterTools
         private void frmMain_Load(object sender, System.EventArgs e)
         {
             FontHelper.RegisterFont(Resources.fontawesome_webfont);
-            this.Height = Math.Min(560, Screen.GetWorkingArea(this).Height - 30);
-            this.listChapters.Columns.Add("Time", 80, HorizontalAlignment.Left);
-            this.listChapters.Columns.Add("Name", 190, HorizontalAlignment.Left);
+            Height = Math.Min(560, Screen.GetWorkingArea(this).Height - 30);
+            listChapters.Columns.Add("Time", 80, HorizontalAlignment.Left);
+            listChapters.Columns.Add("Name", 190, HorizontalAlignment.Left);
             //this.listChapters.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 
             //try
@@ -157,7 +157,7 @@ namespace JarrettVance.ChapterTools
                 if (f.ShowDialog(this) == DialogResult.OK)
                 {
                     Updater.LaunchUpdater(doc);
-                    this.Close();
+                    Close();
                 }
             }
         }
@@ -308,7 +308,7 @@ namespace JarrettVance.ChapterTools
 
         private void menuFileExit_Click(object sender, System.EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void frmMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -352,7 +352,7 @@ namespace JarrettVance.ChapterTools
                     throw new Exception("There is no valid text to copy from the clipboard.");
                 }
 
-                Grabber.ImportFromClipboard(pgc.Chapters, (string)iData.GetData(DataFormats.Text) + "\n", this.miImportDurations.Checked);
+                Grabber.ImportFromClipboard(pgc.Chapters, (string)iData.GetData(DataFormats.Text) + "\n", miImportDurations.Checked);
 
                 FreshChapterView();
                 tsslStatus.Text = "Names successfully imported from clipboard.";
@@ -531,7 +531,7 @@ namespace JarrettVance.ChapterTools
                 return;
             }
 
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             try
             {
                 listChapters.Items.Clear();
@@ -572,7 +572,7 @@ namespace JarrettVance.ChapterTools
                 }
             }
             catch (Exception ex) { Trace.WriteLine(ex); }
-            finally { this.Cursor = Cursors.Default; }
+            finally { Cursor = Cursors.Default; }
         }
 
         private void menuEditTimesImport_Click(object sender, System.EventArgs e)
@@ -588,8 +588,8 @@ namespace JarrettVance.ChapterTools
                 return;
             }
 
-            txtChapterName.TextChanged -= new System.EventHandler(this.txtChapter_TextChanged);
-            txtChapterTime.TextChanged -= new System.EventHandler(this.txtChapter_TextChanged);
+            txtChapterName.TextChanged -= new System.EventHandler(txtChapter_TextChanged);
+            txtChapterTime.TextChanged -= new System.EventHandler(txtChapter_TextChanged);
             ListView lv = (ListView)sender;
 
             if (lv.SelectedItems.Count == 1)
@@ -603,8 +603,8 @@ namespace JarrettVance.ChapterTools
                 txtChapterName.Text = pgc.Chapters[intIndex].Name;
             }
 
-            txtChapterName.TextChanged += new System.EventHandler(this.txtChapter_TextChanged);
-            txtChapterTime.TextChanged += new System.EventHandler(this.txtChapter_TextChanged);
+            txtChapterName.TextChanged += new System.EventHandler(txtChapter_TextChanged);
+            txtChapterTime.TextChanged += new System.EventHandler(txtChapter_TextChanged);
         }
 
         private void txtChapter_TextChanged(object sender, System.EventArgs e)
@@ -939,16 +939,16 @@ namespace JarrettVance.ChapterTools
                     {
                         var titles = Grabber.SuggestTitles(pgc.Title);
                         //txtTitle.Invoke(new Action<List<KeyValuePair<int, string>>>(this.UpdateTitles), titles);
-                        this.UpdateTitles(titles);
+                        UpdateTitles(titles);
                     });
             }
         }
 
         private void UpdateTitles(List<KeyValuePair<int, string>> titles)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                Invoke(new Action<List<KeyValuePair<int, string>>>(this.UpdateTitles), titles);
+                Invoke(new Action<List<KeyValuePair<int, string>>>(UpdateTitles), titles);
                 return;
             }
 
@@ -1121,21 +1121,21 @@ namespace JarrettVance.ChapterTools
             {
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
-                    for (int i = 0; i < this.pgc.Chapters.Count; i++)
+                    for (int i = 0; i < pgc.Chapters.Count; i++)
                     {
-                        if (i == 0 && this.pgc.Chapters[i].Time.TotalSeconds == 0)
+                        if (i == 0 && pgc.Chapters[i].Time.TotalSeconds == 0)
                         {
                             continue;
                         }
 
-                        this.pgc.Chapters[i] = new ChapterEntry()
+                        pgc.Chapters[i] = new ChapterEntry()
                         {
-                            Name = this.pgc.Chapters[i].Name,
-                            Time = this.pgc.Chapters[i].Time.Add(TimeSpan.FromSeconds(dlg.DelaySeconds)),
+                            Name = pgc.Chapters[i].Name,
+                            Time = pgc.Chapters[i].Time.Add(TimeSpan.FromSeconds(dlg.DelaySeconds)),
                         };
                     }
 
-                    this.FreshChapterView();
+                    FreshChapterView();
                 }
             }
 

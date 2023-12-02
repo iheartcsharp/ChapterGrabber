@@ -269,20 +269,15 @@ namespace JarrettVance.ChapterTools
         {
             int nameAt = clipboard.IndexOf(chapterNum.ToString() + ". ");
             int nameTo = clipboard.IndexOf("\n", nameAt + 2 + chapterNum.ToString().Length);
+
             if (nameAt == -1 || nameTo == -1)
             {
                 return "Chapter " + chapterNum.ToString();
             }
 
             string name = clipboard.Substring(nameAt + 2 + chapterNum.ToString().Length, nameTo - (nameAt + 2 + chapterNum.ToString().Length));
-            if (!includeDuration)
-            {
-                return name.RemoveDuration();
-            }
-            else
-            {
-                return name.Trim();
-            }
+
+            return !includeDuration ? name.RemoveDuration() : name.Trim();
         }
 
         public static string RemoveDuration(this string val)

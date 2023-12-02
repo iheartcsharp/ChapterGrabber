@@ -33,14 +33,14 @@ namespace NDepend.Helpers.FileDirectoryPath
             }
 
             string pathRelative = GetPathRelative(path, this);
-            return new FilePathRelative(pathRelative + System.IO.Path.DirectorySeparatorChar + this.FileName);
+            return new FilePathRelative(pathRelative + System.IO.Path.DirectorySeparatorChar + FileName);
         }
 
         public bool CanGetPathRelativeFrom(DirectoryPathAbsolute path)
         {
             try
             {
-                this.GetPathRelativeFrom(path);
+                GetPathRelativeFrom(path);
                 return true;
             }
             catch { }
@@ -55,7 +55,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                string parentPath = InternalStringHelper.GetParentDirectory(this.Path);
+                string parentPath = InternalStringHelper.GetParentDirectory(Path);
                 return new DirectoryPathAbsolute(parentPath);
             }
         }
@@ -66,9 +66,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildFileWithName(fileName);
+            return ParentDirectoryPath.GetChildFileWithName(fileName);
         }
 
         public DirectoryPathAbsolute GetBrotherDirectoryWithName(string fileName)
@@ -77,9 +77,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildDirectoryWithName(fileName);
+            return ParentDirectoryPath.GetChildDirectoryWithName(fileName);
         }
 
         public FilePathAbsolute ChangeExtension(string newExtension)
@@ -94,26 +94,26 @@ namespace NDepend.Helpers.FileDirectoryPath
                 throw new ArgumentException("A file extension must begin with a dot", newExtension);
             }
 
-            if (this.IsEmpty)
+            if (IsEmpty)
             {
                 throw new InvalidOperationException("Cannot change the extension on an empty file");
             }
 
             return new FilePathAbsolute(
-               this.ParentDirectoryPath.GetChildFileWithName(
-                  this.FileNameWithoutExtension + newExtension).Path);
+               ParentDirectoryPath.GetChildFileWithName(
+                  FileNameWithoutExtension + newExtension).Path);
         }
 
         //
         //  Operations that requires physical access
         //
-        public string Drive { get { return this.DriveProtected; } }
+        public string Drive { get { return DriveProtected; } }
 
         public bool Exists
         {
             get
             {
-                return File.Exists(this.Path);
+                return File.Exists(Path);
             }
         }
 
@@ -121,12 +121,12 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                if (!this.Exists)
+                if (!Exists)
                 {
-                    throw new FileNotFoundException(this.Path);
+                    throw new FileNotFoundException(Path);
                 }
 
-                return new FileInfo(this.Path);
+                return new FileInfo(Path);
             }
         }
 

@@ -30,20 +30,20 @@ namespace JarrettVance.ChapterTools
 
         public bool HasNames()
         {
-            if (this.Chapters.Count == 0)
+            if (Chapters.Count == 0)
             {
                 return false;
             }
 
-            string name = this.Chapters[0].Name ?? string.Empty;
+            string name = Chapters[0].Name ?? string.Empty;
             // assume either blank or "Chapter 1"
-            var charCount = this.Chapters
+            var charCount = Chapters
                 .Select(x => x.Name ?? string.Empty)
                 .Select(x => RemoveStandardChapterNameText(x))
                 .Sum(x => x.Length);
 
             // on average each chapter has 2 characters
-            return charCount > this.Chapters.Count * 2;
+            return charCount > Chapters.Count * 2;
         }
 
         public bool NamesNeedPopulated()

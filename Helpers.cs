@@ -31,7 +31,8 @@ namespace JarrettVance.ChapterTools
         public static string RemoveNumbers(this string str)
         {
             var chars = str.ToCharArray()
-                .Where(x => !char.IsDigit(x));
+                                        .Where(x => !char.IsDigit(x));
+
             return new string(chars.ToArray());
         }
 
@@ -79,8 +80,7 @@ namespace JarrettVance.ChapterTools
             All = TopLeft | TopRight | BottomLeft | BottomRight
         }
 
-        public static GraphicsPath Create(int x, int y, int width, int height,
-                                          int radius, RectangleCorners corners)
+        public static GraphicsPath Create(int x, int y, int width, int height, int radius, RectangleCorners corners)
         {
             int xw = x + width;
             int yh = y + height;
@@ -156,18 +156,28 @@ namespace JarrettVance.ChapterTools
         }
 
         public static GraphicsPath Create(Rectangle rect, int radius, RectangleCorners c)
-        { return Create(rect.X, rect.Y, rect.Width, rect.Height, radius, c); }
+        {
+            return Create(rect.X, rect.Y, rect.Width, rect.Height, radius, c);
+        }
 
         public static GraphicsPath Create(int x, int y, int width, int height, int radius)
-        { return Create(x, y, width, height, radius, RectangleCorners.All); }
+        {
+            return Create(x, y, width, height, radius, RectangleCorners.All);
+        }
 
         public static GraphicsPath Create(Rectangle rect, int radius)
-        { return Create(rect.X, rect.Y, rect.Width, rect.Height, radius); }
+        {
+            return Create(rect.X, rect.Y, rect.Width, rect.Height, radius);
+        }
 
         public static GraphicsPath Create(int x, int y, int width, int height)
-        { return Create(x, y, width, height, 5); }
+        {
+            return Create(x, y, width, height, 5);
+        }
 
         public static GraphicsPath Create(Rectangle rect)
-        { return Create(rect.X, rect.Y, rect.Width, rect.Height); }
+        {
+            return Create(rect.X, rect.Y, rect.Width, rect.Height);
+        }
     }
 }

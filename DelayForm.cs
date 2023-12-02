@@ -18,14 +18,14 @@ namespace JarrettVance.ChapterTools
 
         public double DelaySeconds
         {
-            get { return (double)this.numUpDown.Value; }
-            set { this.numUpDown.Value = (decimal)value; }
+            get { return (double)numUpDown.Value; }
+            set { numUpDown.Value = (decimal)value; }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

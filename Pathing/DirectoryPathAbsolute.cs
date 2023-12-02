@@ -39,7 +39,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             try
             {
-                this.GetPathRelativeFrom(path);
+                GetPathRelativeFrom(path);
                 return true;
             }
             catch { }
@@ -54,7 +54,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                string parentPath = InternalStringHelper.GetParentDirectory(this.Path);
+                string parentPath = InternalStringHelper.GetParentDirectory(Path);
                 return new DirectoryPathAbsolute(parentPath);
             }
         }
@@ -65,9 +65,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildFileWithName(fileName);
+            return ParentDirectoryPath.GetChildFileWithName(fileName);
         }
 
         public DirectoryPathAbsolute GetBrotherDirectoryWithName(string fileName)
@@ -76,9 +76,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildDirectoryWithName(fileName);
+            return ParentDirectoryPath.GetChildDirectoryWithName(fileName);
         }
 
         public FilePathAbsolute GetChildFileWithName(string fileName)
@@ -87,9 +87,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Empty filename not accepted", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get a child file name from an empty path"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get a child file name from an empty path"); }
 
-            return new FilePathAbsolute(this.Path + System.IO.Path.DirectorySeparatorChar + fileName);
+            return new FilePathAbsolute(Path + System.IO.Path.DirectorySeparatorChar + fileName);
         }
 
         public DirectoryPathAbsolute GetChildDirectoryWithName(string directoryName)
@@ -98,9 +98,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (directoryName.Length == 0) { throw new ArgumentException("Empty directoryName not accepted", "directoryName"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get a child directory name from an empty path"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get a child directory name from an empty path"); }
 
-            return new DirectoryPathAbsolute(this.Path + System.IO.Path.DirectorySeparatorChar + directoryName);
+            return new DirectoryPathAbsolute(Path + System.IO.Path.DirectorySeparatorChar + directoryName);
         }
 
         public bool IsChildDirectoryOf(DirectoryPathAbsolute parentDir)
@@ -110,20 +110,20 @@ namespace NDepend.Helpers.FileDirectoryPath
             if (parentDir.IsEmpty) { throw new ArgumentException("Empty parentDir not accepted", "parentDir"); }
 
             string parentPathUpperCase = parentDir.Path.ToUpper();
-            string thisPathUpperCase = this.Path.ToUpper();
+            string thisPathUpperCase = Path.ToUpper();
             return thisPathUpperCase.Contains(parentPathUpperCase);
         }
 
         //
         //  Operations that requires physical access
         //
-        public string Drive { get { return this.DriveProtected; } }
+        public string Drive { get { return DriveProtected; } }
 
         public bool Exists
         {
             get
             {
-                return Directory.Exists(this.Path);
+                return Directory.Exists(Path);
             }
         }
 
@@ -131,12 +131,12 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                if (!this.Exists)
+                if (!Exists)
                 {
-                    throw new FileNotFoundException(this.Path);
+                    throw new FileNotFoundException(Path);
                 }
 
-                return new DirectoryInfo(this.Path);
+                return new DirectoryInfo(Path);
             }
         }
 
@@ -144,7 +144,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                DirectoryInfo directoryInfo = this.DirectoryInfo;
+                DirectoryInfo directoryInfo = DirectoryInfo;
                 FileInfo[] filesInfos = directoryInfo.GetFiles();
                 List<FilePathAbsolute> childrenFilesPath = new List<FilePathAbsolute>();
                 foreach (FileInfo fileInfo in filesInfos)
@@ -159,7 +159,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                DirectoryInfo directoryInfo = this.DirectoryInfo;
+                DirectoryInfo directoryInfo = DirectoryInfo;
                 DirectoryInfo[] directoriesInfos = directoryInfo.GetDirectories();
                 List<DirectoryPathAbsolute> childrenDirectoriesPath = new List<DirectoryPathAbsolute>();
                 foreach (DirectoryInfo childDirectoryInfo in directoriesInfos)

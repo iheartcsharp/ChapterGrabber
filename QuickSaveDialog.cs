@@ -33,7 +33,7 @@ namespace JarrettVance.ChapterTools
                 return;
             }
 
-            if (this.pgc.Chapters.Count == 0)
+            if (pgc.Chapters.Count == 0)
             {
                 lblStatus.Text = "No chapters to save.";
                 btnOK.Focus();

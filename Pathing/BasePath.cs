@@ -114,8 +114,8 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                string parentPath = InternalStringHelper.GetParentDirectory(this.Path);
-                if (this.IsRelativePath)
+                string parentPath = InternalStringHelper.GetParentDirectory(Path);
+                if (IsRelativePath)
                 {
                     return new DirectoryPathRelative(parentPath);
                 }
@@ -131,8 +131,8 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                Debug.Assert(this.IsAbsolutePath);
-                if (this.IsEmpty)
+                Debug.Assert(IsAbsolutePath);
+                if (IsEmpty)
                 {
                     throw new InvalidOperationException("Cannot infer a drive from an empty path");
                 }
@@ -142,7 +142,7 @@ namespace NDepend.Helpers.FileDirectoryPath
                 // This ctor sends System.ArgumentException if:
                 //     The first letter of driveName is not an uppercase or lowercase letter from
                 //     'a' to 'z'.
-                return this.m_Path.Substring(0, 1);
+                return m_Path.Substring(0, 1);
             }
         }
 
@@ -155,20 +155,20 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (path.IsEmpty)
             {
-                return this.IsEmpty;
+                return IsEmpty;
             }
 
-            if (this.IsAbsolutePath != path.IsAbsolutePath)
+            if (IsAbsolutePath != path.IsAbsolutePath)
             {
                 return false;
             }
             // A FilePath could be equal to a DirectoryPath
-            if (this.IsDirectoryPath != path.IsDirectoryPath)
+            if (IsDirectoryPath != path.IsDirectoryPath)
             {
                 return false;
             }
 
-            return string.Compare(this.m_Path, path.m_Path, true) == 0;
+            return string.Compare(m_Path, path.m_Path, true) == 0;
         }
 
         public override bool Equals(object obj)
@@ -177,7 +177,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             if (!ReferenceEquals(basePath, null))
             {
                 // Comparaison du contenu.
-                return this.Equals(basePath);
+                return Equals(basePath);
             }
 
             return false;
@@ -202,8 +202,8 @@ namespace NDepend.Helpers.FileDirectoryPath
         public override int GetHashCode()
         {
             return m_Path.ToLower().GetHashCode() +
-               (this.IsAbsolutePath ? 1231 : 5677) +
-               (this.IsFilePath ? 1457 : 3461);
+               (IsAbsolutePath ? 1231 : 5677) +
+               (IsFilePath ? 1457 : 3461);
         }
 
         //

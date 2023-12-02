@@ -37,7 +37,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             try
             {
-                this.GetAbsolutePathFrom(path);
+                GetAbsolutePathFrom(path);
                 return true;
             }
             catch { }
@@ -53,7 +53,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         {
             get
             {
-                string parentPath = InternalStringHelper.GetParentDirectory(this.Path);
+                string parentPath = InternalStringHelper.GetParentDirectory(Path);
                 return new DirectoryPathRelative(parentPath);
             }
         }
@@ -64,9 +64,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildFileWithName(fileName);
+            return ParentDirectoryPath.GetChildFileWithName(fileName);
         }
 
         public DirectoryPathRelative GetBrotherDirectoryWithName(string fileName)
@@ -75,9 +75,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Can't get brother of an empty file", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get brother of an empty file"); }
 
-            return this.ParentDirectoryPath.GetChildDirectoryWithName(fileName);
+            return ParentDirectoryPath.GetChildDirectoryWithName(fileName);
         }
 
         public FilePathRelative GetChildFileWithName(string fileName)
@@ -86,9 +86,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (fileName.Length == 0) { throw new ArgumentException("Empty filename not accepted", "filename"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get a child file name from an empty path"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get a child file name from an empty path"); }
 
-            return new FilePathRelative(this.Path + System.IO.Path.DirectorySeparatorChar + fileName);
+            return new FilePathRelative(Path + System.IO.Path.DirectorySeparatorChar + fileName);
         }
 
         public DirectoryPathRelative GetChildDirectoryWithName(string directoryName)
@@ -97,9 +97,9 @@ namespace NDepend.Helpers.FileDirectoryPath
 
             if (directoryName.Length == 0) { throw new ArgumentException("Empty directoryName not accepted", "directoryName"); }
 
-            if (this.IsEmpty) { throw new InvalidOperationException("Can't get a child directory name from an empty path"); }
+            if (IsEmpty) { throw new InvalidOperationException("Can't get a child directory name from an empty path"); }
 
-            return new DirectoryPathRelative(this.Path + System.IO.Path.DirectorySeparatorChar + directoryName);
+            return new DirectoryPathRelative(Path + System.IO.Path.DirectorySeparatorChar + directoryName);
         }
 
         //

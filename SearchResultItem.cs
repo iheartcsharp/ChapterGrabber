@@ -34,7 +34,7 @@ namespace JarrettVance.ChapterTools
         public SearchResultItem(SearchResult search)
         {
             InitializeComponent();
-            this.Tag = search;
+            Tag = search;
 
             lblName.Text = search.Name;
 
@@ -96,17 +96,17 @@ namespace JarrettVance.ChapterTools
         public new void Select()
         {
             selected = true;
-            this.AlterView();
-            if (this.OnSelected != null)
+            AlterView();
+            if (OnSelected != null)
             {
-                this.OnSelected(this, EventArgs.Empty);
+                OnSelected(this, EventArgs.Empty);
             }
         }
 
         public void Unselect()
         {
             selected = false;
-            this.AlterView();
+            AlterView();
         }
 
         private void AlterView()
@@ -116,12 +116,12 @@ namespace JarrettVance.ChapterTools
             lblDuration.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.GrayText;
             lblCount.ForeColor = selected ? SystemColors.MenuHighlight : SystemColors.GrayText;
             //this.BackColor = selected ? System.Drawing.SystemColors.MenuBar : System.Drawing.SystemColors.Window;
-            this.lblArrow.Visible = selected;
+            lblArrow.Visible = selected;
         }
 
         private void SearchResultItem_Click(object sender, EventArgs e)
         {
-            this.Select();
+            Select();
         }
 
         private void SearchResultItem_Load(object sender, EventArgs e)

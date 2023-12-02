@@ -17,9 +17,9 @@ namespace NDepend.Helpers.FileDirectoryPath
         protected FilePath() : base() { } // special for empty
         protected FilePath(string path, bool isAbsolute) : base(path, isAbsolute)
         {
-            if (!InternalStringHelper.HasParentDir(this.Path))
+            if (!InternalStringHelper.HasParentDir(Path))
             {
-                throw new ArgumentException(this.Path, @"The file path has no parent directory.");
+                throw new ArgumentException(Path, @"The file path has no parent directory.");
             }
         }
 
@@ -29,14 +29,14 @@ namespace NDepend.Helpers.FileDirectoryPath
         //
         //  FileName and extension
         //
-        public string FileName { get { return InternalStringHelper.GetLastName(this.Path); } }
+        public string FileName { get { return InternalStringHelper.GetLastName(Path); } }
 
         public string FileNameWithoutExtension
         {
             get
             {
-                string fileName = this.FileName;
-                string extension = this.FileExtension;
+                string fileName = FileName;
+                string extension = FileExtension;
                 if (extension == null || extension.Length == 0)
                 {
                     return fileName;
@@ -47,7 +47,7 @@ namespace NDepend.Helpers.FileDirectoryPath
             }
         }
 
-        public string FileExtension { get { return InternalStringHelper.GetExtension(this.Path); } }
+        public string FileExtension { get { return InternalStringHelper.GetExtension(Path); } }
         public bool HasExtension(string extension)
         {
             if (extension == null || extension.Length < 2 || extension[0] != '.')
@@ -56,7 +56,7 @@ namespace NDepend.Helpers.FileDirectoryPath
 The extension must be a non-null string that begins with a dot", "extension");
             }
             // Ignore case comparison
-            return (string.Compare(this.FileExtension, extension, true) == 0);
+            return (string.Compare(FileExtension, extension, true) == 0);
         }
 
     }

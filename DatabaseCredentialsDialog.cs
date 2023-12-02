@@ -36,7 +36,7 @@ namespace JarrettVance.ChapterTools
 
         private void DatabaseCredentialsDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!IsValid() && this.DialogResult == DialogResult.OK)
+            if (!IsValid() && DialogResult == DialogResult.OK)
             {
                 if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing ||
                     e.CloseReason == CloseReason.None)
@@ -51,8 +51,8 @@ namespace JarrettVance.ChapterTools
             if (IsValid())
             {
                 Settings.Default.DatabaseApiKey = txtApiKey.Text.Trim();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
 

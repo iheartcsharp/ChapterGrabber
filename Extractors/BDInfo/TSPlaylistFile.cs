@@ -438,7 +438,7 @@ namespace BDInfo
                         if (TotalLength - relativeSeconds > 1.0)
                         {
                             streamClip.Chapters.Add(chapterSeconds);
-                            this.Chapters.Add(relativeSeconds);
+                            Chapters.Add(relativeSeconds);
                         }
 #if DEBUG
                         Debug.WriteLine(string.Format(

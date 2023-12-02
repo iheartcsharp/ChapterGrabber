@@ -25,7 +25,7 @@ namespace NDepend.Helpers.FileDirectoryPath
         //
         //  DirectoryName
         //
-        public string DirectoryName { get { return InternalStringHelper.GetLastName(this.Path); } }
-        public bool HasParentDir { get { return InternalStringHelper.HasParentDir(this.Path); } }
+        public string DirectoryName { get { return InternalStringHelper.GetLastName(Path); } }
+        public bool HasParentDir { get { return InternalStringHelper.HasParentDir(Path); } }
     }
 }

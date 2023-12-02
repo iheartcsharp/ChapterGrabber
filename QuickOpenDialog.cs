@@ -23,12 +23,12 @@ namespace JarrettVance.ChapterTools
 
         private void QuickOpen(string dir)
         {
-            this.txtFolder.Text = dir;
-            this.flowDiscs.Controls.Clear();
+            txtFolder.Text = dir;
+            flowDiscs.Controls.Clear();
 
             if (string.IsNullOrEmpty(dir))
             {
-                this.flowDiscs.Controls.Add(new ErrorItem("Please choose a folder containing your disc backups."));
+                flowDiscs.Controls.Add(new ErrorItem("Please choose a folder containing your disc backups."));
                 return;
             }
 
@@ -58,21 +58,21 @@ namespace JarrettVance.ChapterTools
                     var di = new DiscItem(disc);
                     di.Opened += (s, e) =>
                         {
-                            this.DiscPath = ((Disc)((DiscItem)s).Tag).Path;
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
+                            DiscPath = ((Disc)((DiscItem)s).Tag).Path;
+                            DialogResult = DialogResult.OK;
+                            Close();
                         };
-                    this.flowDiscs.Controls.Add(di);
+                    flowDiscs.Controls.Add(di);
                 }
 
                 if (discs.Count == 0)
                 {
-                    this.flowDiscs.Controls.Add(new ErrorItem("No discs found.  Please select your backup folder containing discs."));
+                    flowDiscs.Controls.Add(new ErrorItem("No discs found.  Please select your backup folder containing discs."));
                 }
             }
             catch (Exception ex)
             {
-                this.flowDiscs.Controls.Add(new ErrorItem(ex.Message));
+                flowDiscs.Controls.Add(new ErrorItem(ex.Message));
             }
         }
 
@@ -98,9 +98,9 @@ namespace JarrettVance.ChapterTools
         {
 
             var dir = new DirectoryPathAbsolute(path);
-            this.Path = path;
-            this.Type = type;
-            this.Name = dir.DirectoryName;
+            Path = path;
+            Type = type;
+            Name = dir.DirectoryName;
 
             var exts = new List<string>();
             if (dir.ChildrenFilesPath.Any(x => x.FileExtension == ".xml"))
@@ -116,7 +116,7 @@ namespace JarrettVance.ChapterTools
                 exts.Add("txt");
             }
 
-            this.FoundExtractions = exts.ToArray();
+            FoundExtractions = exts.ToArray();
         }
         public string Path { get; protected set; }
         public string Name { get; protected set; }
