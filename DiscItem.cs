@@ -54,10 +54,7 @@ namespace JarrettVance.ChapterTools
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Opened != null)
-            {
-                Opened(this, e);
-            }
+            Opened?.Invoke(this, e);
         }
     }
 }

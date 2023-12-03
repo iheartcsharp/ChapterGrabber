@@ -97,10 +97,7 @@ namespace JarrettVance.ChapterTools
         {
             selected = true;
             AlterView();
-            if (OnSelected != null)
-            {
-                OnSelected(this, EventArgs.Empty);
-            }
+            OnSelected?.Invoke(this, EventArgs.Empty);
         }
 
         public void Unselect()

@@ -7,7 +7,7 @@ namespace JarrettVance.ChapterTools
 {
     public abstract class ChapterGrabber
     {
-        public static List<ChapterGrabber> Grabbers = new List<ChapterGrabber> { new Grabbers.TagChimpGrabber(), new Grabbers.DatabaseGrabber() };
+        public static List<ChapterGrabber> Grabbers = new List<ChapterGrabber> () { new Grabbers.TagChimpGrabber(), new Grabbers.DatabaseGrabber() };
 
         public abstract void PopulateNames(SearchResult result, ChapterInfo chapterInfo, bool includeDurations);
         public abstract void PopulateNames(string hash, ChapterInfo chapterInfo);
@@ -21,10 +21,7 @@ namespace JarrettVance.ChapterTools
 
         protected void OnSearchComplete()
         {
-            if (SearchComplete != null)
-            {
-                SearchComplete(this, EventArgs.Empty);
-            }
+            SearchComplete?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -25,25 +25,16 @@ namespace JarrettVance.ChapterTools
 
         protected void OnExtractionComplete()
         {
-            if (ExtractionComplete != null)
-            {
-                ExtractionComplete(this, EventArgs.Empty);
-            }
+            ExtractionComplete?.Invoke(this, EventArgs.Empty);
         }
 
         protected void OnStreamDetected(ChapterInfo pgc)
         {
-            if (StreamDetected != null)
-            {
-                StreamDetected(this, new ProgramChainArg() { ProgramChain = pgc });
-            }
+            StreamDetected?.Invoke(this, new ProgramChainArg() { ProgramChain = pgc });
         }
         protected void OnChaptersLoaded(ChapterInfo pgc)
         {
-            if (ChaptersLoaded != null)
-            {
-                ChaptersLoaded(this, new ProgramChainArg() { ProgramChain = pgc });
-            }
+            ChaptersLoaded?.Invoke(this, new ProgramChainArg() { ProgramChain = pgc });
         }
     }
 
